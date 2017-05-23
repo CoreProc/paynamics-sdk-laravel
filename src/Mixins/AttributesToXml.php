@@ -1,10 +1,8 @@
-<?php
-
-namespace Coreproc\Paynamics\Requests;
+<?php namespace CoreProc\Paynamics\PayGate\Mixins;
 
 use SimpleXMLElement;
 
-trait PaynamicsRequestBodyToXml
+trait AttributesToXml
 {
     public function arrayToXml(array $array, SimpleXMLElement $xml, $parentKey = null) {
         foreach($array as $key => $value) {

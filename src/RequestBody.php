@@ -1,10 +1,13 @@
-<?php namespace Coreproc\Paynamics\Requests;
+<?php namespace CoreProc\Paynamics\PayGate;
 
-use SimpleXMLElement;
+use CoreProc\Paynamics\PayGate\Contracts\ClientInterface;
+use CoreProc\Paynamics\PayGate\Contracts\RequestBodyInterface;
+use CoreProc\Paynamics\PayGate\Mixins\AttributesToXml;
+use CoreProc\Paynamics\PayGate\Mixins\SignatureGenerator;
 
-class PaynamicsRequestBody implements PaynamicsRequestBodyInterface
+class RequestBody implements RequestBodyInterface
 {
-    use PaynamicsRequestBodyToXml;
+    use AttributesToXml, SignatureGenerator;
 
     protected $fillable = [
         'orders',
@@ -49,6 +52,25 @@ class PaynamicsRequestBody implements PaynamicsRequestBodyInterface
     public function __construct(array $attributes = [])
     {
         $this->setAttributes($attributes);
+    }
+
+    /**
+     * Sets the default request body content
+     *
+     * @param ClientInterface $client
+     * @return self
+     */
+    public function setDefaults(ClientInterface $client)
+    {
+        $defaults = [
+            'mid' => $client->getMerchantId(),
+            'ip_address' => $_SERVER['SERVER_ADDR'],
+            'client_ip' => $_SERVER['REMOTE_ADDR'],
+        ];
+
+        $this->setAttributes(array_replace($this->getAttributes(), $defaults));
+
+        return $this;
     }
 
     /**

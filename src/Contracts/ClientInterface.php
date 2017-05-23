@@ -1,11 +1,8 @@
-<?php namespace Coreproc\Paynamics\Client;
+<?php namespace CoreProc\Paynamics\PayGate\Contracts;
 
-use Coreproc\Paynamics\Requests\PaynamicsRequestBodyInterface;
-use Coreproc\Paynamics\Requests\PaynamicsRequestInterface;
-use Coreproc\Paynamics\Responses\PaynamicsResponseInterface;
 use GuzzleHttp\Client;
 
-interface PaynamicsClientInterface
+interface ClientInterface
 {
 
     /**
@@ -14,6 +11,14 @@ interface PaynamicsClientInterface
      * @return Client
      */
     public function getHttpClient();
+
+    /**
+     * Sets configuration
+     *
+     * @param array $config
+     * @return self
+     */
+    public function setConfig(array $config);
 
     /**
      * Returns the request URL to be used. Depends if sandbox or production.
@@ -34,7 +39,7 @@ interface PaynamicsClientInterface
      *
      * @param bool $sandbox
      */
-    public function setSandbox($sandbox);
+    public function setSandbox($sandbox = false);
 
     /**
      * Returns assigned Merchant ID
@@ -69,17 +74,17 @@ interface PaynamicsClientInterface
     /**
      * Create new request
      *
-     * @param PaynamicsRequestBodyInterface $requestBody
+     * @param RequestBodyInterface $requestBody
      * @param array $options
-     * @return PaynamicsRequestInterface
+     * @return RequestInterface
      */
-    public function createRequest(PaynamicsRequestBodyInterface $requestBody, array $options = []);
+    public function createRequest(RequestBodyInterface $requestBody, array $options = []);
 
     /**
      * Create new request and execute
      *
-     * @param PaynamicsRequestBodyInterface $requestBody
-     * @return PaynamicsResponseInterface
+     * @param RequestBodyInterface $requestBody
+     * @return ResponseInterface
      */
-    public function send(PaynamicsRequestBodyInterface $requestBody);
+    public function send(RequestBodyInterface $requestBody);
 }
