@@ -32,8 +32,9 @@ class Client implements ClientInterface
 
     public function __construct(array $config = [])
     {
-        $config['merchant_id']  = '0000002104179FEBECEC';
-        $config['merchant_key']  = 'C2091FA4B007307E54AB056B3B130DEB';
+        $config['merchant_id']      = '0000002104179FEBECEC';
+        $config['merchant_key']     = 'C2091FA4B007307E54AB056B3B130DEB';
+        $config['sandbox']          = false;
 
         $this->setConfig($config);
 

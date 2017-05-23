@@ -1,7 +1,9 @@
 <?php namespace CoreProc\Paynamics\PayGate;
 
 use CoreProc\Paynamics\PayGate\Contracts\ClientInterface;
+use CoreProc\Paynamics\PayGate\Contracts\ItemGroupInterface;
 use CoreProc\Paynamics\PayGate\Contracts\RequestBodyInterface;
+use Coreproc\Paynamics\PayGate\Exceptions\PayGateException;
 use CoreProc\Paynamics\PayGate\Mixins\AttributesToXml;
 use CoreProc\Paynamics\PayGate\Mixins\SignatureGenerator;
 
@@ -69,6 +71,13 @@ class RequestBody implements RequestBodyInterface
         ];
 
         $this->setAttributes(array_replace($this->getAttributes(), $defaults));
+
+        return $this;
+    }
+
+    public function setItemGroup(ItemGroupInterface $itemGroup)
+    {
+        $this->setAttribute('orders', $itemGroup->toArray());
 
         return $this;
     }
