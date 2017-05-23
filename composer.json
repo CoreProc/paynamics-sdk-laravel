@@ -1,6 +1,6 @@
 {
-    "name": "paynamics/paynamics-sdk-php",
-    "description": "Paynamics SDK for PHP",
+    "name": "paynamics/paygate-sdk-php",
+    "description": "Paynamics PayGate SDK for PHP",
     "license": "proprietary",
     "authors": [
         {
