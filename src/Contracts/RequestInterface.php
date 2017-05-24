@@ -1,6 +1,6 @@
 <?php namespace CoreProc\Paynamics\Paygate\Contracts;
 
-use CoreProc\Paynamics\Paygate\Exceptions\PaygateException;
+use Exception;
 
 interface RequestInterface
 {
@@ -41,7 +41,7 @@ interface RequestInterface
      *
      * @param array $options
      * @return ResponseInterface|bool
-     * @throws PaygateException
+     * @throws Exception
      */
     public function execute(array $options = []);
 }

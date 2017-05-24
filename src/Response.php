@@ -51,7 +51,7 @@ class Response implements ResponseInterface
     }
 
     /**
-     * @param ResponseInterface $response
+     * @param GuzzleResponseInterface $response
      */
     private function setResponse($response)
     {

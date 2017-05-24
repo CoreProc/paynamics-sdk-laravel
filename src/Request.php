@@ -5,6 +5,7 @@ use CoreProc\Paynamics\Paygate\Contracts\RequestBodyInterface;
 use CoreProc\Paynamics\Paygate\Contracts\RequestInterface;
 use Coreproc\Paynamics\Paygate\Contracts\ResponseInterface;
 use Coreproc\Paynamics\Paygate\Exceptions\PaygateException;
+use Exception;
 
 class Request implements RequestInterface
 {
@@ -77,7 +78,7 @@ class Request implements RequestInterface
      *
      * @param array $options
      * @return ResponseInterface|bool
-     * @throws PaygateException
+     * @throws Exception
      */
     public function execute(array $options = [])
     {
@@ -96,7 +97,7 @@ class Request implements RequestInterface
             ]);
 
             return new Response($response, $this);
-        } catch (PaygateException $e) {
+        } catch (Exception $e) {
 
         }
 
