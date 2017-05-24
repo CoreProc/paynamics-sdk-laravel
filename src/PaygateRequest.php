@@ -79,8 +79,6 @@ class PaygateRequest implements RequestInterface
         $requestBody->setDefaults($client);
         $requestBody->generateRequestSignature($client);
 
-        dd($requestBody->getAttributes());
-
         // Generate auto-submit form
         $form = '<form id="paygate_frm" method="POST" action="' . $url . '">';
         $form .= '<input type="hidden" name="paymentrequest" value="' . base64_encode($requestBody->__toXmlString()) . '">';
