@@ -1,7 +1,7 @@
 <?php namespace CoreProc\Paynamics\Paygate;
 
 use Exception;
-use GuzzleHttp\Client;
+use GuzzleHttp\Client as GuzzleClient;
 
 interface ClientInterface
 {
@@ -9,7 +9,7 @@ interface ClientInterface
     /**
      * Returns the HTTP Client
      *
-     * @return Client
+     * @return GuzzleClient
      */
     public function getHttpClient();
 

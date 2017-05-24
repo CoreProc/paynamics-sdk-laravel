@@ -1,9 +1,5 @@
 <?php namespace CoreProc\Paynamics\Paygate;
 
-use CoreProc\Paynamics\Paygate\Contracts\ClientInterface;
-use CoreProc\Paynamics\Paygate\Contracts\RequestBodyInterface;
-use CoreProc\Paynamics\Paygate\Contracts\RequestInterface;
-use Coreproc\Paynamics\Paygate\Contracts\ResponseInterface;
 use Exception;
 use GuzzleHttp\Client as GuzzleClient;
 
