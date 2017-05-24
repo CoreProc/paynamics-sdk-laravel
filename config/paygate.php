@@ -2,10 +2,10 @@
 
 return [
 
-    'merchant_id' => '',
+    'merchant_id' => env('PAYGATE_MERCHANT_ID',''),
 
-    'merchant_key' => '',
+    'merchant_key' => env('PAYGATE_MERCHANT_KEY',''),
 
-    'sandbox' => true,
+    'sandbox' => env('PAYGATE_SANDBOX', true),
 
 ];
