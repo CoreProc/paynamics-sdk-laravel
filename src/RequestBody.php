@@ -45,10 +45,14 @@ class RequestBody implements RequestBodyInterface
     protected $attributes = [];
 
     /**
-     * PaynamicsRequestBody constructor.
+     * RequestBody constructor.
      */
     public function __construct(array $attributes = [])
     {
+        foreach($this->fillable as $key) {
+            $this->setAttribute($key, null);
+        }
+
         $this->setAttributes($attributes);
     }
 
@@ -84,7 +88,7 @@ class RequestBody implements RequestBodyInterface
      */
     public function getAttribute($key)
     {
-        if (!!$key && in_array($key, $this->fillable) && isset($this->attributes[$key])) {
+        if (!!$key && in_array($key, $this->fillable)) {
             return $this->attributes[$key];
         }
 
@@ -119,7 +123,7 @@ class RequestBody implements RequestBodyInterface
      */
     public function setAttribute($key, $value)
     {
-        if (array_key_exists($key, $this->fillable)) {
+        if (in_array($key, $this->fillable)) {
             $this->attributes[$key] = $value;
         }
 

@@ -36,11 +36,9 @@ interface RequestInterface
     public function setRequestBody(RequestBodyInterface $requestBody);
 
     /**
-     * Executes the request and returns corresponding response
-     *      or throws an error
+     * Creates an auto-submit form that will redirect to the payment gateway
      *
-     * @param array $options
      * @return string
      */
-    public function execute();
+    public function generateForm();
 }

@@ -70,7 +70,7 @@ class PaygateRequest implements RequestInterface
      *
      * @return string
      */
-    public function execute()
+    public function generateForm()
     {
         $client = $this->getClient();
         $url = $client->getRequestUrl();
@@ -78,6 +78,8 @@ class PaygateRequest implements RequestInterface
 
         $requestBody->setDefaults($client);
         $requestBody->generateRequestSignature($client);
+
+        dd($requestBody->getAttributes());
 
         // Generate auto-submit form
         $form = '<form id="paygate_frm" method="POST" action="' . $url . '">';

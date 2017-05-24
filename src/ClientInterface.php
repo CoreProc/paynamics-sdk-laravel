@@ -73,16 +73,15 @@ interface ClientInterface
      * Create new request
      *
      * @param RequestBodyInterface $requestBody
-     * @param array $options
      * @return RequestInterface
      */
-    public function createRequest(RequestBodyInterface $requestBody, array $options = []);
+    public function createRequest(RequestBodyInterface $requestBody);
 
     /**
      * Create new request and execute
      *
      * @param RequestBodyInterface $requestBody
-     * @return ResponseInterface
+     * @return string
      */
     public function send(RequestBodyInterface $requestBody);
 }

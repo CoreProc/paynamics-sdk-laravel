@@ -148,12 +148,11 @@ class Client implements ClientInterface
      * Create new request
      *
      * @param RequestBodyInterface $requestBody
-     * @param array $options
      * @return RequestInterface
      */
-    public function createRequest(RequestBodyInterface $requestBody, array $options = [])
+    public function createRequest(RequestBodyInterface $requestBody)
     {
-        return new PaygateRequest($this, $requestBody, $options);
+        return new PaygateRequest($this, $requestBody);
     }
 
     /**
@@ -164,6 +163,6 @@ class Client implements ClientInterface
      */
     public function send(RequestBodyInterface $requestBody)
     {
-        return $this->createRequest($requestBody)->execute();
+        return $this->createRequest($requestBody)->generateForm();
     }
 }
