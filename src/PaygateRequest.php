@@ -3,11 +3,11 @@
 use CoreProc\Paynamics\Paygate\Contracts\ClientInterface;
 use CoreProc\Paynamics\Paygate\Contracts\RequestBodyInterface;
 use CoreProc\Paynamics\Paygate\Contracts\RequestInterface;
-use Coreproc\Paynamics\Paygate\Contracts\ResponseInterface;
-use Coreproc\Paynamics\Paygate\Exceptions\PaygateException;
+use CoreProc\Paynamics\Paygate\Contracts\ResponseInterface;
 use Exception;
+use GuzzleHttp\TransferStats;
 
-class Request implements RequestInterface
+class PaygateRequest implements RequestInterface
 {
 
     /**
@@ -93,12 +93,15 @@ class Request implements RequestInterface
             $response = $client->getHttpClient()->post($url, [
                 'form_params' => [
                     'paymentrequest' => base64_encode($requestBody->__toXmlString())
-                ]
+                ],
+                'on_stats' => function (TransferStats $stats) use (&$redirectUrl) {
+                    $redirectUrl = $stats->getEffectiveUri();
+                }
             ]);
 
-            return new Response($response, $this);
+            return new PaygateResponse($response, $redirectUrl);
         } catch (Exception $e) {
-
+            echo $e->getMessage();
         }
 
         return false;

@@ -4,7 +4,7 @@ use CoreProc\Paynamics\Paygate\Contracts\ClientInterface;
 use CoreProc\Paynamics\Paygate\Contracts\RequestBodyInterface;
 use CoreProc\Paynamics\Paygate\Contracts\RequestInterface;
 use Coreproc\Paynamics\Paygate\Contracts\ResponseInterface;
-use Coreproc\Paynamics\Paygate\Exceptions\PaygateException;
+use Exception;
 use GuzzleHttp\Client as GuzzleClient;
 
 class Client implements ClientInterface
@@ -93,12 +93,12 @@ class Client implements ClientInterface
      *
      * @param bool $sandbox
      * @return self
-     * @throws PaygateException
+     * @throws Exception
      */
     public function setSandbox($sandbox = false)
     {
         if ( ! is_bool($sandbox)) {
-            throw new PaygateException("Sandbox value should be boolean");
+            throw new Exception("Sandbox value should be boolean");
         }
 
         $this->sandbox = $sandbox;
@@ -131,11 +131,12 @@ class Client implements ClientInterface
      *
      * @param $merchantId
      * @return self
+     * @throws Exception
      */
     public function setMerchantId($merchantId)
     {
         if ( ! is_string($merchantId)) {
-            throw new PaygateException("Merchant ID should be string");
+            throw new Exception("Merchant ID should be string");
         }
 
         $this->merchantId = $merchantId;
@@ -148,11 +149,12 @@ class Client implements ClientInterface
      *
      * @param $merchantKey
      * @return self
+     * @throws Exception
      */
     public function setMerchantKey($merchantKey)
     {
         if ( ! is_string($merchantKey)) {
-            throw new PaygateException("Merchant Key should be string");
+            throw new Exception("Merchant Key should be string");
         }
 
         $this->merchantKey = $merchantKey;
@@ -169,7 +171,7 @@ class Client implements ClientInterface
      */
     public function createRequest(RequestBodyInterface $requestBody, array $options = [])
     {
-        return new Request($this, $requestBody, $options);
+        return new PaygateRequest($this, $requestBody, $options);
     }
 
     /**

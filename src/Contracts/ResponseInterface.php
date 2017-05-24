@@ -6,13 +6,13 @@ interface ResponseInterface
 {
 
     /**
-     * @return RequestInterface
-     */
-    public function getRequest();
-
-    /**
      * @return GuzzleResponseInterface
      */
     public function getResponse();
+
+    /**
+     * @return string
+     */
+    public function getRedirectUrl();
 
 }

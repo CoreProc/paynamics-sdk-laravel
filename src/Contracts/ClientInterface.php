@@ -1,5 +1,6 @@
 <?php namespace CoreProc\Paynamics\Paygate\Contracts;
 
+use Exception;
 use GuzzleHttp\Client;
 
 interface ClientInterface
@@ -38,6 +39,8 @@ interface ClientInterface
      * Sets if sandbox or production.
      *
      * @param bool $sandbox
+     * @return self
+     * @throws Exception
      */
     public function setSandbox($sandbox = false);
 
@@ -60,6 +63,7 @@ interface ClientInterface
      *
      * @param $merchantId
      * @return self
+     * @throws Exception
      */
     public function setMerchantId($merchantId);
 
@@ -68,6 +72,7 @@ interface ClientInterface
      *
      * @param $merchantKey
      * @return self
+     * @throws Exception
      */
     public function setMerchantKey($merchantKey);
 

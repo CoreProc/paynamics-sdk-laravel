@@ -88,7 +88,7 @@ class RequestBody implements RequestBodyInterface
      */
     public function getAttribute($key)
     {
-        if (!!$key && in_array($key, $this->fillable)) {
+        if (!!$key && in_array($key, $this->fillable) && isset($this->attributes[$key])) {
             return $this->attributes[$key];
         }
 
@@ -123,7 +123,7 @@ class RequestBody implements RequestBodyInterface
      */
     public function setAttribute($key, $value)
     {
-        if (in_array($key, $this->fillable)) {
+        if (array_key_exists($key, $this->fillable)) {
             $this->attributes[$key] = $value;
         }
 

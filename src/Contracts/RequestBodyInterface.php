@@ -1,7 +1,5 @@
 <?php namespace CoreProc\Paynamics\Paygate\Contracts;
 
-use Coreproc\Paynamics\Paygate\Exceptions\PaygateException;
-
 interface RequestBodyInterface
 {
 
