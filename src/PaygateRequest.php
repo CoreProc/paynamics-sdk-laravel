@@ -81,10 +81,10 @@ class PaygateRequest implements RequestInterface
         $requestBody->setAttribute('signature', $requestSignature);
 
         // Generate auto-submit form
-        $form = '<form id="paygate_frm" method="POST" action="' . $url . '">';
+        $form = '<form name="paygate_frm" method="POST" action="' . $url . '">';
         $form .= '<input type="hidden" name="paymentrequest" value="' . base64_encode($requestBody->__toXmlString()) . '">';
         $form .= '</form>';
-        $form .= '<script>document.getElementById("paygate_frm").submit();</script>';
+        $form .= '<script>document.paygate_frm.submit();</script>';
 
         return $form;
     }
