@@ -1,8 +1,5 @@
 <?php namespace CoreProc\Paynamics\Paygate;
 
-use CoreProc\Paynamics\Paygate\Contracts\ItemGroupInterface;
-use CoreProc\Paynamics\Paygate\Contracts\ItemInterface;
-
 class ItemGroup implements ItemGroupInterface
 {
     protected $attributes = [];

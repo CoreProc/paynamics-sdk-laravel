@@ -1,6 +1,5 @@
 <?php namespace CoreProc\Paynamics\Paygate;
 
-use CoreProc\Paynamics\Paygate\Contracts\ResponseBodyInterface;
 use CoreProc\Paynamics\Paygate\Mixins\AttributesToXml;
 use CoreProc\Paynamics\Paygate\Mixins\SignatureGenerator;
 

@@ -1,6 +1,5 @@
 <?php namespace CoreProc\Paynamics\Paygate;
 
-use CoreProc\Paynamics\Paygate\Contracts\ResponseInterface;
 use Psr\Http\Message\ResponseInterface as GuzzleResponseInterface;
 use Psr\Http\Message\UriInterface;
 

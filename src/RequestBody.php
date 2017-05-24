@@ -1,9 +1,5 @@
 <?php namespace CoreProc\Paynamics\Paygate;
 
-use CoreProc\Paynamics\Paygate\Contracts\ClientInterface;
-use CoreProc\Paynamics\Paygate\Contracts\ItemGroupInterface;
-use CoreProc\Paynamics\Paygate\Contracts\RequestBodyInterface;
-use Coreproc\Paynamics\Paygate\Exceptions\PaygateException;
 use CoreProc\Paynamics\Paygate\Mixins\AttributesToXml;
 use CoreProc\Paynamics\Paygate\Mixins\SignatureGenerator;
 

@@ -1,7 +1,5 @@
 <?php namespace CoreProc\Paynamics\Paygate;
 
-use CoreProc\Paynamics\Paygate\Contracts\ItemInterface;
-
 class Item implements ItemInterface
 {
     protected $details = [];

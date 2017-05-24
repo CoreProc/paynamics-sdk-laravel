@@ -28,10 +28,11 @@ class ServiceProvider extends LaravelServiceProvider
         if (file_exists(config_path('paygate.php'))) {
             $this->app->singleton('paygate', function ($app) {
                 $config = $app['config']->get('paygate');
+
                 return new Client([
-                    'merchantId'       => config('paygate.merchant_id'),
-                    'merchantKey'      => config('paygate.merchant_key'),
-                    'sandbox'          => config('paygate.sandbox'),
+                    'merchant_id'     => $config['merchant_id'],
+                    'merchant_key'    => $config['merchant_key'],
+                    'sandbox'         => $config['sandbox'],
                 ]);
             });
         }
