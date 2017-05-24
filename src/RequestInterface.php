@@ -40,8 +40,7 @@ interface RequestInterface
      *      or throws an error
      *
      * @param array $options
-     * @return ResponseInterface|bool
-     * @throws Exception
+     * @return string
      */
-    public function execute(array $options = []);
+    public function execute();
 }

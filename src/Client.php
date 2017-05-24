@@ -24,23 +24,9 @@ class Client implements ClientInterface
      */
     private $sandbox;
 
-    private $httpClient;
-
     public function __construct(array $config = [])
     {
         $this->setConfig($config);
-
-        $this->httpClient = new GuzzleClient;
-    }
-
-    /**
-     * Returns the HTTP Client
-     *
-     * @return GuzzleClient
-     */
-    public function getHttpClient()
-    {
-        return $this->httpClient;
     }
 
     /**
@@ -174,7 +160,7 @@ class Client implements ClientInterface
      * Create new request and execute
      *
      * @param RequestBodyInterface $requestBody
-     * @return ResponseInterface
+     * @return string
      */
     public function send(RequestBodyInterface $requestBody)
     {

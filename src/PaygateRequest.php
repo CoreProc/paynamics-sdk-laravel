@@ -1,8 +1,5 @@
 <?php namespace CoreProc\Paynamics\Paygate;
 
-use Exception;
-use GuzzleHttp\TransferStats;
-
 class PaygateRequest implements RequestInterface
 {
 
@@ -16,7 +13,7 @@ class PaygateRequest implements RequestInterface
      */
     private $requestBody;
 
-    public function __construct(ClientInterface $client, RequestBodyInterface $requestBody, $options = [])
+    public function __construct(ClientInterface $client, RequestBodyInterface $requestBody)
     {
         $this->setClient($client);
         $this->setRequestBody($requestBody);
@@ -69,14 +66,11 @@ class PaygateRequest implements RequestInterface
     }
 
     /**
-     * Executes the request and returns corresponding response
-     *      or throws an error
+     * Creates an auto-submit form that will redirect to the payment gateway
      *
-     * @param array $options
-     * @return ResponseInterface|bool
-     * @throws Exception
+     * @return string
      */
-    public function execute(array $options = [])
+    public function execute()
     {
         $client = $this->getClient();
         $url = $client->getRequestUrl();
@@ -85,21 +79,12 @@ class PaygateRequest implements RequestInterface
         $requestBody->setDefaults($client);
         $requestBody->generateRequestSignature($client);
 
-        try {
-            $response = $client->getHttpClient()->post($url, [
-                'form_params' => [
-                    'paymentrequest' => base64_encode($requestBody->__toXmlString())
-                ],
-                'on_stats' => function (TransferStats $stats) use (&$redirectUrl) {
-                    $redirectUrl = $stats->getEffectiveUri();
-                }
-            ]);
+        // Generate auto-submit form
+        $form = '<form id="paygate_frm" method="POST" action="' . $url . '">';
+        $form .= '<input type="hidden" name="paymentrequest" value="' . base64_encode($requestBody->__toXmlString()) . '">';
+        $form .= '</form>';
+        $form .= '<script>document.getElementById("paygate_frm").submit();</script>';
 
-            return new PaygateResponse($response, $redirectUrl);
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
-
-        return false;
+        return $form;
     }
 }

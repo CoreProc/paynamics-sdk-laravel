@@ -7,13 +7,6 @@ interface ClientInterface
 {
 
     /**
-     * Returns the HTTP Client
-     *
-     * @return GuzzleClient
-     */
-    public function getHttpClient();
-
-    /**
      * Sets configuration
      *
      * @param array $config
