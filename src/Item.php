@@ -4,6 +4,13 @@ class Item implements ItemInterface
 {
     protected $details = [];
 
+    public function __construct($details)
+    {
+        $this->setName($details['name']);
+        $this->setQuantity($details['quantity']);
+        $this->setAmount($details['amount']);
+    }
+
     /**
      * Sets Item Name
      *

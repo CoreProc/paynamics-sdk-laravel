@@ -12,11 +12,15 @@ class ItemGroup implements ItemGroupInterface
     /**
      * Adds an Item to the ItemGroup
      *
-     * @param ItemInterface $item
+     * @param ItemInterface|array $item
      * @return self
      */
-    public function addItem(ItemInterface $item)
+    public function addItem($item)
     {
+        if (is_array($item)) {
+            $item = new Item($item);
+        }
+
         $this->attributes['items'][] = $item->getDetails();
 
         return $this;

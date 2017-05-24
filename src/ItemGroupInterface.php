@@ -6,10 +6,10 @@ interface ItemGroupInterface {
     /**
      * Adds an Item to the ItemGroup
      *
-     * @param ItemInterface $item
+     * @param ItemInterface|array $item
      * @return self
      */
-    public function addItem(ItemInterface $item);
+    public function addItem($item);
 
     /**
      * Returns ItemGroup to array
