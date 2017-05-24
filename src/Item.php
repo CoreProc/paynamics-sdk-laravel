@@ -19,7 +19,7 @@ class Item implements ItemInterface
      */
     public function setName($name)
     {
-        $this->details['name'] = $name;
+        $this->details['itemname'] = $name;
 
         return $this;
     }

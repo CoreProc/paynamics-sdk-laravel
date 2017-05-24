@@ -32,16 +32,4 @@ trait SignatureGenerator
 
         return hash('sha512', $signString . $cert);
     }
-
-    public function generateResponseSignature(ResponseInterface $response)
-    {
-        $attributes = $this->getAttributes();
-
-        $signString = $attributes['merchantid'] . $attributes['request_id']  . $attributes['response_id'] . $attributes['response_code'] . $attributes['response_message'] .
-            $attributes['response_advise']  . $attributes['timestamp'] . $attributes['rebill_id'] . $attributes['merchantkey'];
-
-        return $signString;
-
-    }
-
 }

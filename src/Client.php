@@ -7,7 +7,7 @@ class Client implements ClientInterface
 {
     private $productionUrl = '';
 
-    private $sandboxUrl = 'https://testpti.payserv.net/webpaymentV2/default.aspx';
+    private $sandboxUrl = 'https://testpti.payserv.net/webpayment/defaultv1/ResponsePage.aspx';
 
     /**
      * @var string
