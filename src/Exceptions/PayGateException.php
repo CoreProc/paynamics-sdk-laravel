@@ -1,6 +1,6 @@
-<?php namespace Coreproc\Paynamics\PayGate\Exceptions;
+<?php namespace Coreproc\Paynamics\Paygate\Exceptions;
 
-class PayGateException extends \Exception
+class PaygateException extends \Exception
 {
 
 }

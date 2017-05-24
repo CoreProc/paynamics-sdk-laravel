@@ -1,8 +1,8 @@
-<?php namespace CoreProc\Paynamics\PayGate\Laravel;
+<?php namespace CoreProc\Paynamics\Paygate\Laravel;
 
-use CoreProc\Paynamics\PayGate\Client;
+use CoreProc\Paynamics\Paygate\Client;
 
-class PayGateServiceProvider extends \Illuminate\Support\ServiceProvider
+class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {
 
     /**
@@ -25,7 +25,7 @@ class PayGateServiceProvider extends \Illuminate\Support\ServiceProvider
     public function register()
     {
         if (file_exists(config_path('paygate.php'))) {
-            $this->app->bind('paygate', function () {
+            $this->app->singleton('paygate', function ($app) {
                 return new Client([
                     'merchantId'       => config('paygate.merchant_id'),
                     'merchantKey'      => config('paygate.merchant_key'),

@@ -1,4 +1,4 @@
-<?php namespace CoreProc\Paynamics\PayGate\Mixins;
+<?php namespace CoreProc\Paynamics\Paygate\Mixins;
 
 use SimpleXMLElement;
 

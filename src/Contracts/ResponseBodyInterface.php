@@ -1,4 +1,4 @@
-<?php namespace CoreProc\Paynamics\PayGate\Contracts;
+<?php namespace CoreProc\Paynamics\Paygate\Contracts;
 
 interface ResponseBodyInterface
 {

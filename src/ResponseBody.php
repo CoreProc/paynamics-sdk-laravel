@@ -1,8 +1,8 @@
-<?php namespace CoreProc\Paynamics\PayGate;
+<?php namespace CoreProc\Paynamics\Paygate;
 
-use CoreProc\Paynamics\PayGate\Contracts\ResponseBodyInterface;
-use CoreProc\Paynamics\PayGate\Mixins\AttributesToXml;
-use CoreProc\Paynamics\PayGate\Mixins\SignatureGenerator;
+use CoreProc\Paynamics\Paygate\Contracts\ResponseBodyInterface;
+use CoreProc\Paynamics\Paygate\Mixins\AttributesToXml;
+use CoreProc\Paynamics\Paygate\Mixins\SignatureGenerator;
 
 class ResponseBody implements ResponseBodyInterface
 {

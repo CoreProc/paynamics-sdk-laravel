@@ -1,11 +1,11 @@
-<?php namespace CoreProc\Paynamics\PayGate;
+<?php namespace CoreProc\Paynamics\Paygate;
 
-use CoreProc\Paynamics\PayGate\Contracts\ClientInterface;
-use CoreProc\Paynamics\PayGate\Contracts\ItemGroupInterface;
-use CoreProc\Paynamics\PayGate\Contracts\RequestBodyInterface;
-use Coreproc\Paynamics\PayGate\Exceptions\PayGateException;
-use CoreProc\Paynamics\PayGate\Mixins\AttributesToXml;
-use CoreProc\Paynamics\PayGate\Mixins\SignatureGenerator;
+use CoreProc\Paynamics\Paygate\Contracts\ClientInterface;
+use CoreProc\Paynamics\Paygate\Contracts\ItemGroupInterface;
+use CoreProc\Paynamics\Paygate\Contracts\RequestBodyInterface;
+use Coreproc\Paynamics\Paygate\Exceptions\PaygateException;
+use CoreProc\Paynamics\Paygate\Mixins\AttributesToXml;
+use CoreProc\Paynamics\Paygate\Mixins\SignatureGenerator;
 
 class RequestBody implements RequestBodyInterface
 {

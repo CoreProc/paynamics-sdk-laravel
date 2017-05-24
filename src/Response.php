@@ -1,7 +1,7 @@
-<?php namespace CoreProc\Paynamics\PayGate;
+<?php namespace CoreProc\Paynamics\Paygate;
 
-use CoreProc\Paynamics\PayGate\Contracts\RequestInterface;
-use Coreproc\Paynamics\PayGate\Contracts\ResponseInterface;
+use CoreProc\Paynamics\Paygate\Contracts\RequestInterface;
+use Coreproc\Paynamics\Paygate\Contracts\ResponseInterface;
 use Psr\Http\Message\ResponseInterface as GuzzleResponseInterface;
 
 class Response implements ResponseInterface

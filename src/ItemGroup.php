@@ -1,7 +1,7 @@
-<?php namespace CoreProc\Paynamics\PayGate;
+<?php namespace CoreProc\Paynamics\Paygate;
 
-use CoreProc\Paynamics\PayGate\Contracts\ItemGroupInterface;
-use CoreProc\Paynamics\PayGate\Contracts\ItemInterface;
+use CoreProc\Paynamics\Paygate\Contracts\ItemGroupInterface;
+use CoreProc\Paynamics\Paygate\Contracts\ItemInterface;
 
 class ItemGroup implements ItemGroupInterface
 {

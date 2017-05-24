@@ -1,10 +1,10 @@
-<?php namespace CoreProc\Paynamics\PayGate;
+<?php namespace CoreProc\Paynamics\Paygate;
 
-use CoreProc\Paynamics\PayGate\Contracts\ClientInterface;
-use CoreProc\Paynamics\PayGate\Contracts\RequestBodyInterface;
-use CoreProc\Paynamics\PayGate\Contracts\RequestInterface;
-use Coreproc\Paynamics\PayGate\Contracts\ResponseInterface;
-use Coreproc\Paynamics\PayGate\Exceptions\PayGateException;
+use CoreProc\Paynamics\Paygate\Contracts\ClientInterface;
+use CoreProc\Paynamics\Paygate\Contracts\RequestBodyInterface;
+use CoreProc\Paynamics\Paygate\Contracts\RequestInterface;
+use Coreproc\Paynamics\Paygate\Contracts\ResponseInterface;
+use Coreproc\Paynamics\Paygate\Exceptions\PaygateException;
 
 class Request implements RequestInterface
 {
@@ -77,7 +77,7 @@ class Request implements RequestInterface
      *
      * @param array $options
      * @return ResponseInterface|bool
-     * @throws PayGateException
+     * @throws PaygateException
      */
     public function execute(array $options = [])
     {
@@ -96,7 +96,7 @@ class Request implements RequestInterface
             ]);
 
             return new Response($response, $this);
-        } catch (PayGateException $e) {
+        } catch (PaygateException $e) {
 
         }
 

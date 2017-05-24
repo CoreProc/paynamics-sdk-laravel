@@ -1,6 +1,6 @@
 {
     "name": "paynamics/paygate-sdk-php",
-    "description": "Paynamics PayGate SDK for PHP",
+    "description": "Paynamics Paygate SDK for PHP",
     "license": "proprietary",
     "keywords": [
         "laravel",
@@ -17,7 +17,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "CoreProc\\Paynamics\\PayGate\\": "src"
+            "CoreProc\\Paynamics\\Paygate\\": "src"
         }
     },
     "require": {

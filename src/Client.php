@@ -1,10 +1,10 @@
-<?php namespace CoreProc\Paynamics\PayGate;
+<?php namespace CoreProc\Paynamics\Paygate;
 
-use CoreProc\Paynamics\PayGate\Contracts\ClientInterface;
-use CoreProc\Paynamics\PayGate\Contracts\RequestBodyInterface;
-use CoreProc\Paynamics\PayGate\Contracts\RequestInterface;
-use Coreproc\Paynamics\PayGate\Contracts\ResponseInterface;
-use Coreproc\Paynamics\PayGate\Exceptions\PayGateException;
+use CoreProc\Paynamics\Paygate\Contracts\ClientInterface;
+use CoreProc\Paynamics\Paygate\Contracts\RequestBodyInterface;
+use CoreProc\Paynamics\Paygate\Contracts\RequestInterface;
+use Coreproc\Paynamics\Paygate\Contracts\ResponseInterface;
+use Coreproc\Paynamics\Paygate\Exceptions\PaygateException;
 use GuzzleHttp\Client as GuzzleClient;
 
 class Client implements ClientInterface
@@ -93,12 +93,12 @@ class Client implements ClientInterface
      *
      * @param bool $sandbox
      * @return self
-     * @throws PayGateException
+     * @throws PaygateException
      */
     public function setSandbox($sandbox = false)
     {
         if ( ! is_bool($sandbox)) {
-            throw new PayGateException("Sandbox value should be boolean");
+            throw new PaygateException("Sandbox value should be boolean");
         }
 
         $this->sandbox = $sandbox;
@@ -135,7 +135,7 @@ class Client implements ClientInterface
     public function setMerchantId($merchantId)
     {
         if ( ! is_string($merchantId)) {
-            throw new PayGateException("Merchant ID should be string");
+            throw new PaygateException("Merchant ID should be string");
         }
 
         $this->merchantId = $merchantId;
@@ -152,7 +152,7 @@ class Client implements ClientInterface
     public function setMerchantKey($merchantKey)
     {
         if ( ! is_string($merchantKey)) {
-            throw new PayGateException("Merchant Key should be string");
+            throw new PaygateException("Merchant Key should be string");
         }
 
         $this->merchantKey = $merchantKey;
