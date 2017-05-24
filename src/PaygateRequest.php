@@ -75,9 +75,9 @@ class PaygateRequest implements RequestInterface
         $client = $this->getClient();
         $url = $client->getRequestUrl();
         $requestBody = $this->getRequestBody();
-        $requestSignature = $requestBody->generateRequestSignature($client);
-
         $requestBody->setDefaults($client);
+
+        $requestSignature = $requestBody->generateRequestSignature($client);
         $requestBody->setAttribute('signature', $requestSignature);
 
         // Generate auto-submit form

@@ -68,6 +68,8 @@ class RequestBody implements RequestBodyInterface
             'mid' => $client->getMerchantId(),
             'ip_address' => $_SERVER['SERVER_ADDR'],
             'client_ip' => $_SERVER['REMOTE_ADDR'],
+            'secure3d' => 'try3d',
+            'trxtype' => 'sale',
         ];
 
         $this->setAttributes(array_replace($this->getAttributes(), $defaults));

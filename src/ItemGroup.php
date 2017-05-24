@@ -21,7 +21,7 @@ class ItemGroup implements ItemGroupInterface
             $item = new Item($item);
         }
 
-        $this->attributes['items'][] = $item->getDetails();
+        $this->attributes['items']['Items'][] = $item->getDetails();
 
         return $this;
     }

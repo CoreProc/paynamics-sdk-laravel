@@ -18,7 +18,7 @@ trait AttributesToXml
                 }
 
             } else {
-                $xml->addChild($key, htmlspecialchars($value));
+                $xml->addChild($key, $value ? htmlspecialchars($value) : null);
             }
         }
 

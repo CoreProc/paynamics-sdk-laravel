@@ -1,13 +1,12 @@
 <?php namespace CoreProc\Paynamics\Paygate;
 
 use Exception;
-use GuzzleHttp\Client as GuzzleClient;
 
 class Client implements ClientInterface
 {
     private $productionUrl = '';
 
-    private $sandboxUrl = 'https://testpti.payserv.net/webpayment/defaultv1/ResponsePage.aspx';
+    private $sandboxUrl = 'https://testpti.payserv.net/webpaymentV2/default.aspx';
 
     /**
      * @var string

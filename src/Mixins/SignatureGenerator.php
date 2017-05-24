@@ -1,7 +1,6 @@
 <?php namespace CoreProc\Paynamics\Paygate\Mixins;
 
 use CoreProc\Paynamics\Paygate\ClientInterface;
-use CoreProc\Paynamics\Paygate\ResponseInterface;
 
 trait SignatureGenerator
 {
