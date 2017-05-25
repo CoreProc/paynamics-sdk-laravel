@@ -4,10 +4,6 @@ use Exception;
 
 class Client implements ClientInterface
 {
-    private $productionUrl = '';
-
-    private $sandboxUrl = 'https://testpti.payserv.net/webpaymentV2/default.aspx';
-
     /**
      * @var string
      */
@@ -19,10 +15,24 @@ class Client implements ClientInterface
     private $merchantKey;
 
     /**
+     * @var string
+     */
+    private $productionUrl;
+
+    /**
      * @var bool
      */
     private $sandbox;
 
+    /**
+     * @var string
+     */
+    private $sandboxUrl;
+
+    /**
+     *
+     * @param array $config
+     */
     public function __construct(array $config = [])
     {
         $this->setConfig($config);
@@ -44,6 +54,12 @@ class Client implements ClientInterface
         }
         if (isset($config['sandbox'])) {
             $this->setSandbox($config['sandbox']);
+        }
+        if (isset($config['sandbox_url'])) {
+            $this->sandboxUrl = $config['sandbox_url'];
+        }
+        if (isset($config['production_url'])) {
+            $this->productionUrl = $config['production_url'];
         }
 
         return $this;

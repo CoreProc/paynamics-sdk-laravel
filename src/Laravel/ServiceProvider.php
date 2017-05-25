@@ -33,6 +33,8 @@ class ServiceProvider extends LaravelServiceProvider
                     'merchant_id'     => $config['merchant_id'],
                     'merchant_key'    => $config['merchant_key'],
                     'sandbox'         => $config['sandbox'],
+                    'sandbox_url'     => $config['url.sandbox'],
+                    'production_url'  => $config['url.production'],
                 ]);
             });
         }
