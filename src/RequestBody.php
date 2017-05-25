@@ -34,6 +34,7 @@ class RequestBody implements RequestBodyInterface
         'client_ip',
         'amount',
         'currency',
+        'expiry_limit',
         'mlogo_url',
         'pmethod',
         'signature',
