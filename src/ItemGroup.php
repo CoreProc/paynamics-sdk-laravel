@@ -26,6 +26,19 @@ class ItemGroup implements ItemGroupInterface
         return $this;
     }
 
+    public function getTotal()
+    {
+        $total = 0;
+
+        if (isset($this->attributes['items']['Items'])) {
+            foreach ($this->attributes['items']['Items'] as $item) {
+                $total += ((float) $item['amount'] * (int) $item['quantity']);
+            }
+        }
+
+        return number_format($total, '2');
+    }
+
     public function getAttribute($key)
     {
         if (!!$key && array_key_exists($key, $this->attributes)) {

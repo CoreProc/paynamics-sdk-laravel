@@ -6,29 +6,49 @@ trait SignatureGenerator
 {
     public function generateRequestSignature(ClientInterface $client)
     {
-        $signString = $this->mid .
-            $this->request_id .
-            $this->ip_address .
-            $this->notification_url .
-            $this->response_url .
-            $this->fname .
-            $this->lname .
-            $this->mname .
-            $this->address1 .
-            $this->address2 .
-            $this->city .
-            $this->state .
-            $this->country .
-            $this->zip .
-            $this->email .
-            $this->phone .
-            $this->client_ip .
-            $this->amount .
-            $this->currency .
-            $this->secure3d;
+        /*
+         * For Refund
+         *
+         **/
+        if ( ! empty($this->org_trxid)) {
+            $signString =  $client->getMerchantId() .
+                $this->request_id .
+                $this->org_trxid .
+                $this->ip_address .
+                $this->notification_url .
+                $this->response_url .
+                $this->amount .
+                $client->getMerchantKey();
+        }
 
-        $cert = $client->getMerchantKey();
+        /*
+         * For Responsive Payment
+         *
+         **/
+        else {
+            $signString = $client->getMerchantId() .
+                $this->request_id .
+                $this->ip_address .
+                $this->notification_url .
+                $this->response_url .
+                $this->fname .
+                $this->lname .
+                $this->mname .
+                $this->address1 .
+                $this->address2 .
+                $this->city .
+                $this->state .
+                $this->country .
+                $this->zip .
+                $this->email .
+                $this->phone .
+                $this->client_ip .
+                $this->amount .
+                $this->currency .
+                $this->secure3d .
+                $client->getMerchantKey();
+        }
 
-        return hash('sha512', $signString . $cert);
+        $this->signature = hash('sha512', $signString);
     }
 }

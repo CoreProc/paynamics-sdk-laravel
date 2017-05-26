@@ -1,5 +1,7 @@
 <?php namespace CoreProc\Paynamics\Paygate;
 
+use CoreProc\Paynamics\Paygate\Constants\Secure3d;
+use CoreProc\Paynamics\Paygate\Constants\TransactionType;
 use Exception;
 
 class Client implements ClientInterface
@@ -171,13 +173,41 @@ class Client implements ClientInterface
     }
 
     /**
-     * Create new request and execute
+     * Executes Responsive Payment Transaction
      *
      * @param RequestBodyInterface $requestBody
+     * @param string $transactionType
+     * @param string $secure3d
+     * @param null $expiryLimit
      * @return string
      */
-    public function send(RequestBodyInterface $requestBody)
+    public function responsivePayment(RequestBodyInterface $requestBody, $transactionType = TransactionType::SALE, $secure3d = Secure3d::TRY3D, $expiryLimit = null)
     {
+        $requestBody->setAttributes([
+            'client_ip' => $_SERVER['REMOTE_ADDR'],
+            'secure3d' => $secure3d,
+            'trxtype' => $transactionType,
+            'expiry_date' => $expiryLimit ? $this->timeFormat($expiryLimit) : null
+        ]);
+
         return $this->createRequest($requestBody)->generateForm();
+    }
+
+    public function refund($responseId, $amount, RequestBodyInterface $requestBody)
+    {
+        $requestBody->setAttributes([
+            'org_trxid' => $responseId,
+        ]);
+
+        return $this->createRequest($requestBody)->generateForm();
+    }
+
+    private function timeFormat($time)
+    {
+        if (strtotime($time) === false) {
+            throw new Exception('Invalid datetime format');
+        }
+
+        return date('Y-m-d H:i', strtotime($time));
     }
 }

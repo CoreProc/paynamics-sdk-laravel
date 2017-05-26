@@ -12,6 +12,13 @@ interface ItemGroupInterface {
     public function addItem($item);
 
     /**
+     * Get total amount of items in ItemGroup
+     *
+     * @return string
+     */
+    public function getTotal();
+
+    /**
      * Returns ItemGroup to array
      *
      * @return array

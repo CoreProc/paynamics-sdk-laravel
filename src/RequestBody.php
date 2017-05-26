@@ -37,6 +37,7 @@ class RequestBody implements RequestBodyInterface
         'expiry_limit',
         'mlogo_url',
         'pmethod',
+        'org_trxid',
         'signature',
     ];
 
@@ -68,12 +69,10 @@ class RequestBody implements RequestBodyInterface
         $defaults = [
             'mid' => $client->getMerchantId(),
             'ip_address' => $_SERVER['SERVER_ADDR'],
-            'client_ip' => $_SERVER['REMOTE_ADDR'],
-            'secure3d' => 'try3d',
-            'trxtype' => 'sale',
         ];
 
         $this->setAttributes(array_replace($this->getAttributes(), $defaults));
+        $this->generateRequestSignature($client);
 
         return $this;
     }
@@ -81,6 +80,7 @@ class RequestBody implements RequestBodyInterface
     public function setItemGroup(ItemGroupInterface $itemGroup)
     {
         $this->setAttribute('orders', $itemGroup->toArray());
+        $this->setAttribute('amount', $itemGroup->getTotal());
 
         return $this;
     }

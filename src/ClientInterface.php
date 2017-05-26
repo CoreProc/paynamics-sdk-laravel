@@ -76,12 +76,4 @@ interface ClientInterface
      * @return RequestInterface
      */
     public function createRequest(RequestBodyInterface $requestBody);
-
-    /**
-     * Create new request and execute
-     *
-     * @param RequestBodyInterface $requestBody
-     * @return string
-     */
-    public function send(RequestBodyInterface $requestBody);
 }
