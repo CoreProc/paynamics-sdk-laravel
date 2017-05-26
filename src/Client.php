@@ -197,6 +197,7 @@ class Client implements ClientInterface
     {
         $requestBody->setAttributes([
             'org_trxid' => $responseId,
+            'amount' => number_format((float) $amount, 2)
         ]);
 
         return $this->createRequest($requestBody)->generateForm();
