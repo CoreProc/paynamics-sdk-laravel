@@ -193,11 +193,19 @@ class Client implements ClientInterface
         return $this->createRequest($requestBody)->generateForm();
     }
 
+    /**
+     * Executes Refund
+     *
+     * @param $responseId
+     * @param $amount
+     * @param RequestBodyInterface $requestBody
+     * @return string
+     */
     public function refund($responseId, $amount, RequestBodyInterface $requestBody)
     {
         $requestBody->setAttributes([
             'org_trxid' => $responseId,
-            'amount' => number_format((float) $amount, 2)
+            'amount' => number_format($amount, 2)
         ]);
 
         return $this->createRequest($requestBody)->generateForm();
