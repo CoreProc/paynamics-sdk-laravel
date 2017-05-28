@@ -183,11 +183,19 @@ class Client implements ClientInterface
      */
     public function responsivePayment(RequestBodyInterface $requestBody, $transactionType = TransactionType::SALE, $secure3d = Secure3d::TRY3D, $expiryLimit = null)
     {
+        if ( ! in_array($transactionType, TransactionType::toArray())) {
+            throw new Exception('Invalid transaction type');
+        }
+
+        if ( ! in_array($secure3d, Secure3d::toArray())) {
+            throw new Exception('Invalid Secure3d option');
+        }
+
         $requestBody->setAttributes([
             'client_ip' => $_SERVER['REMOTE_ADDR'],
             'secure3d' => $secure3d,
             'trxtype' => $transactionType,
-            'expiry_date' => $expiryLimit ? $this->timeFormat($expiryLimit) : null
+            'expiry_limit' => $expiryLimit ? $this->dateTimeFormat($expiryLimit) : null
         ]);
 
         return $this->createRequest($requestBody)->generateForm();
@@ -211,7 +219,15 @@ class Client implements ClientInterface
         return $this->createRequest($requestBody)->generateForm();
     }
 
-    private function timeFormat($time)
+
+    /**
+     * Converts valid date time into format 'Y-m-d H:i'
+     * To be used in expiry limit
+     *
+     * @param string $time
+     * @return string
+     */
+    private function dateTimeFormat($time)
     {
         if (strtotime($time) === false) {
             throw new Exception('Invalid datetime format');

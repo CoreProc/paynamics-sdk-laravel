@@ -6,4 +6,12 @@ class TransactionType
     const AUTHORIZED = 'authorized';
     const PREAUTHORIZED = 'preauthorized';
 
+    public static function toArray()
+    {
+        return [
+            self::SALE,
+            self::AUTHORIZED,
+            self::PREAUTHORIZED,
+        ];
+    }
 }
