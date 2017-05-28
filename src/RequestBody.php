@@ -8,6 +8,7 @@ class RequestBody implements RequestBodyInterface
     use AttributesToXml, SignatureGenerator;
 
     protected $fillable = [
+        '_method',
         'orders',
         'mid',
         'request_id',
@@ -38,6 +39,9 @@ class RequestBody implements RequestBodyInterface
         'mlogo_url',
         'pmethod',
         'org_trxid',
+        'org_trxid2',
+        'dispute_start_date',
+        'dispute_end_date',
         'signature',
     ];
 

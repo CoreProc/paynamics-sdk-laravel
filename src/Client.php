@@ -176,12 +176,13 @@ class Client implements ClientInterface
      * Executes Responsive Payment Transaction
      *
      * @param RequestBodyInterface $requestBody
+     * @param string $requestId
      * @param string $transactionType
      * @param string $secure3d
      * @param null $expiryLimit
      * @return string
      */
-    public function responsivePayment(RequestBodyInterface $requestBody, $transactionType = TransactionType::SALE, $secure3d = Secure3d::TRY3D, $expiryLimit = null)
+    public function responsivePayment(RequestBodyInterface $requestBody, $requestId, $transactionType = TransactionType::SALE, $secure3d = Secure3d::TRY3D, $expiryLimit = null)
     {
         if ( ! in_array($transactionType, TransactionType::toArray())) {
             throw new Exception('Invalid transaction type');
@@ -192,7 +193,9 @@ class Client implements ClientInterface
         }
 
         $requestBody->setAttributes([
+            '_method' => __METHOD__,
             'client_ip' => $_SERVER['REMOTE_ADDR'],
+            'request_id' => $requestId,
             'secure3d' => $secure3d,
             'trxtype' => $transactionType,
             'expiry_limit' => $expiryLimit ? $this->dateTimeFormat($expiryLimit) : null
@@ -202,16 +205,21 @@ class Client implements ClientInterface
     }
 
     /**
-     * Executes Refund
+     * Executes Refund, Reversal or Settle Authorized / Pre-authorized method
      *
-     * @param $responseId
-     * @param $amount
+     * NOTE: Reversal is only allowed on the same calendar day as of the original request.
+     *
      * @param RequestBodyInterface $requestBody
+     * @param string $requestId
+     * @param string $responseId
+     * @param $amount
      * @return string
      */
-    public function refund($responseId, $amount, RequestBodyInterface $requestBody)
+    public function reversePayment(RequestBodyInterface $requestBody, $requestId, $responseId, $amount)
     {
         $requestBody->setAttributes([
+            '_method' => __METHOD__,
+            'request_id' => $requestId,
             'org_trxid' => $responseId,
             'amount' => number_format($amount, 2)
         ]);
@@ -219,6 +227,80 @@ class Client implements ClientInterface
         return $this->createRequest($requestBody)->generateForm();
     }
 
+    /**
+     * Execute Query method that will allow the
+     * merchant to design an application in their
+     * back office to process this transaction request.
+     *
+     * @param RequestBodyInterface $requestBody
+     * @param string $requestId
+     * @param string $responseId
+     * @param string $responseId2
+     * @return string
+     */
+    public function query(RequestBodyInterface $requestBody, $requestId, $responseId, $responseId2 = null)
+    {
+        $requestBody->setAttributes([
+            '_method' => __METHOD__,
+            'request_id' => $requestId,
+            'org_trxid' => $responseId,
+            'org_trxid2' => $responseId2,
+        ]);
+
+        return $this->createRequest($requestBody)->generateForm();
+    }
+
+    /**
+     * Executes dispute query method that allows you to
+     * retrieve disputes coming from your merchant account
+     *
+     * @param RequestBodyInterface $requestBody
+     * @param string $requestId
+     * @param string $startDate
+     * @param string $endDate
+     * @return string
+     */
+    public function disputeQuery(RequestBodyInterface $requestBody, $requestId, $startDate, $endDate)
+    {
+        $requestBody->setAttributes([
+            '_method' => __METHOD__,
+            'request_id' => $requestId,
+            'dispute_start_date' => $this->dateTimeFormat($startDate),
+            'dispute_end_date' => $this->dateTimeFormat($endDate),
+        ]);
+
+        return $this->createRequest($requestBody)->generateForm();
+    }
+
+    /**
+     * Merchants that have their own rebilling system can use
+     * Rebill Token transaction type to perform succeeding
+     * rebilling of their future clients
+     *
+     * @param RequestBodyInterface $requestBody
+     * @param string $requestId
+     * @param string $startDate
+     * @param string $endDate
+     * @return string
+     */
+    public function rebill(RequestBodyInterface $requestBody, $requestId, $responseId, $token, $transactionType = TransactionType::SALE, $amount)
+    {
+        if ( ! in_array($transactionType, TransactionType::toArray())) {
+            throw new Exception('Invalid transaction type');
+        }
+
+        $requestBody->setAttributes([
+            '_method' => __METHOD__,
+            'client_ip' => $_SERVER['REMOTE_ADDR'],
+            'request_id' => $requestId,
+            'org_trxid' => $responseId,
+            'token_id' => $token,
+            'trxtype' => $transactionType,
+            'amount' => number_format($amount, 2),
+        ]);
+
+        return $this->createRequest($requestBody)->generateForm();
+    }
 
     /**
      * Converts valid date time into format 'Y-m-d H:i'
