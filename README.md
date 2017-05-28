@@ -53,7 +53,7 @@ $items->addItem([
 ]);
 ```
 ##### Set Item Group to the request body
-This will bind the items accordingly to the request body and computes it's total amount.
+This will bind the items accordingly to the request body and computes its total amount.
 ```
 $requestBody->setItemGroup($items);
 ```
