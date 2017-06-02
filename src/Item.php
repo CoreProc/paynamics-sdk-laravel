@@ -45,7 +45,7 @@ class Item implements ItemInterface
      */
     public function setAmount($amount)
     {
-        $this->details['amount'] = number_format($amount, 2);
+        $this->details['amount'] = number_format($amount, 2, '.', '');
 
         return $this;
     }
