@@ -76,7 +76,16 @@ class RequestBody implements RequestBodyInterface
         ];
 
         $this->setAttributes(array_replace($this->getAttributes(), $defaults));
+
+        if ($this->_method == 'responsivePayment') {
+            unset($this->attributes['org_trxid']);
+            unset($this->attributes['org_trxid2']);
+            unset($this->attributes['dispute_start_date']);
+            unset($this->attributes['dispute_end_date']);
+        }
+
         $this->generateRequestSignature($client);
+
 
         return $this;
     }
