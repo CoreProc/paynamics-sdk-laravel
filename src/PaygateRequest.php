@@ -77,7 +77,9 @@ class PaygateRequest implements RequestInterface
         $requestBody = $this->getRequestBody();
         $requestBody->setDefaults($client);
 
-//        dd($requestBody->__toXmlString());
+        if (class_exists('Log')) {
+            \Log::info('PAYNAMICS REQUEST BODY XML', [$requestBody->__toXmlString()]);
+        }
 
         // Generate auto-submit form
         $form = '<form name="paygate_frm" method="POST" action="' . $url . '">';
