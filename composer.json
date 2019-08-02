@@ -1,7 +1,7 @@
 {
     "name": "paynamics/paygate-sdk-php",
     "description": "Paynamics Paygate SDK for PHP",
-    "license": "proprietary",
+    "license": "MIT",
     "keywords": [
         "laravel",
         "paygate",
