@@ -4,9 +4,10 @@ namespace Coreproc\PaynamicsSdk\Services;
 
 use Coreproc\PaynamicsSdk\Services\Interfaces\RequestInterface;
 use Coreproc\PaynamicsSdk\Services\Clients\PostClient;
-use Coreproc\PaynamicsSdk\PaynamicsClient;
 use Coreproc\PaynamicsSdk\Request\PaymentRequest;
 use Coreproc\PaynamicsSdk\Request\ItemRequest;
+use Coreproc\PaynamicsSdk\PaynamicsClient;
+use GuzzleHttp\Exception\GuzzleException;
 use SimpleXMLElement;
 use Exception;
 
@@ -68,6 +69,7 @@ class PaymentService implements RequestInterface
      *
      * @return void
      * @throws Exception
+     * @throws GuzzleException
      */
     public function post()
     {
@@ -75,7 +77,7 @@ class PaymentService implements RequestInterface
             throw new Exception('No request found. Please set the request body.');
         }
 
-        PostClient::make();
+        PostClient::make(['paymentrequest' => base64_encode($this->toXml())]);
     }
 
     /**
@@ -86,6 +88,10 @@ class PaymentService implements RequestInterface
      */
     public function toXml(): string
     {
+        if (empty($this->payment)) {
+            throw new Exception('No request found. Please set the request body.');
+        }
+
         foreach ($this->payment->fillable as $attribute) {
             if ($attribute === 'orders') {
                 $itemsXml = $this->xml->addChild('items');
@@ -118,6 +124,10 @@ class PaymentService implements RequestInterface
      */
     public function signature(): string
     {
+        if (empty($this->payment)) {
+            throw new Exception('No request found. Please set the request body.');
+        }
+
         $toSign = $this->paynamicsClient->getMerchantId() .
             $this->requestId
             . $this->payment->ip_address
