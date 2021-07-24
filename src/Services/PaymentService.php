@@ -7,7 +7,6 @@ use Coreproc\PaynamicsSdk\Services\Clients\PostClient;
 use Coreproc\PaynamicsSdk\Request\PaymentRequest;
 use Coreproc\PaynamicsSdk\Request\ItemRequest;
 use Coreproc\PaynamicsSdk\PaynamicsClient;
-use GuzzleHttp\Exception\GuzzleException;
 use SimpleXMLElement;
 use Exception;
 
@@ -34,12 +33,39 @@ class PaymentService implements RequestInterface
     public string $requestId;
 
     /**
+     * @var array
+     */
+    public array $signaturePattern = [
+        'mid',
+        'request_id',
+        'ip_address',
+        'notification_url',
+        'response_url',
+        'fname',
+        'lname',
+        'mname',
+        'address1',
+        'address2',
+        'city',
+        'state',
+        'country',
+        'zip',
+        'email',
+        'phone',
+        'client_ip',
+        'amount',
+        'currency',
+        'secure3d',
+        'merchantkey',
+    ];
+
+    /**
      * PaymentRequest constructor.
      */
     public function __construct()
     {
         $this->paynamicsClient = app(PaynamicsClient::class);
-        $this->xml = new SimpleXMLElement('<Request/>');
+        $this->xml = (new SimpleXMLElement('<Request/>'));
         $this->requestId = substr(uniqid(), 0, 13);
     }
 
@@ -67,24 +93,21 @@ class PaymentService implements RequestInterface
     /**
      * Send payment post request
      *
-     * @return void
-     * @throws Exception
-     * @throws GuzzleException
+     * @return object
      */
-    public function post()
+    public function post(): object
     {
         if (empty($this->payment)) {
             throw new Exception('No request found. Please set the request body.');
         }
 
-        PostClient::make(['paymentrequest' => base64_encode($this->toXml())]);
+        return PostClient::payment(['paymentrequest' => base64_encode($this->toXml())]);
     }
 
     /**
      * Generate XML data for payment request
      *
      * @return string
-     * @throws Exception
      */
     public function toXml(): string
     {
@@ -94,26 +117,24 @@ class PaymentService implements RequestInterface
 
         foreach ($this->payment->fillable as $attribute) {
             if ($attribute === 'orders') {
-                $itemsXml = $this->xml->addChild('items');
+                $itemsXml = $this->xml->addChild('orders')->addChild('items');
 
                 /** @var ItemRequest $item */
                 foreach ($this->payment->orders as $item) {
-                    $itemsXml->addChild('Items')
-                        ->addChild('itemname', $item->item_name);
-                    $itemsXml->addChild('Items')
-                        ->addChild('quantity', $item->quantity);
-                    $itemsXml->addChild('Items')
-                        ->addChild('amount', $item->quantity);
+                    $itemXml = $itemsXml->addChild('Items');
+                    $itemXml->addChild('itemname', $item->item_name);
+                    $itemXml->addChild('quantity', $item->quantity);
+                    $itemXml->addChild('amount', $item->quantity);
                 }
             } else {
-                $this->xml->addChild($attribute, $this->payment->$attribute);
+                $this->xml->addChild($attribute, $this->payment->$attribute ?? '');
             }
         }
-
         $this->xml->addChild('mid', $this->paynamicsClient->getMerchantId());
         $this->xml->addChild('request_id', $this->requestId);
         $this->xml->addChild('signature', $this->signature());
-        return $this->xml;
+
+        return $this->xml->asXML();
     }
 
     /**
@@ -128,28 +149,21 @@ class PaymentService implements RequestInterface
             throw new Exception('No request found. Please set the request body.');
         }
 
-        $toSign = $this->paynamicsClient->getMerchantId() .
-            $this->requestId
-            . $this->payment->ip_address
-            . $this->payment->notification_url
-            . $this->payment->response_url
-            . $this->payment->fname
-            . $this->payment->lname
-            . $this->payment->mname
-            . $this->payment->address1
-            . $this->payment->address2
-            . $this->payment->city
-            . $this->payment->state
-            . $this->payment->country
-            . $this->payment->zip
-            . $this->payment->email
-            . $this->payment->phone
-            . $this->payment->client_ip
-            . $this->payment->amount
-            . $this->payment->currency
-            . $this->payment->secure3d
-            . $this->paynamicsClient->getMerchantKey();
-
+        $toSign = '';
+        foreach ($this->signaturePattern as $pattern) {
+            if ($pattern === 'mid') {
+                $toSign = $toSign . $this->paynamicsClient->getMerchantId();
+            }elseif ($pattern === 'request_id') {
+                $toSign = $toSign . $this->requestId;
+            }elseif ($pattern === 'merchantkey') {
+                $toSign = $toSign . $this->paynamicsClient->getMerchantKey();
+            }else {
+                $toSign = isset($this->payment->$pattern)
+                    ? $toSign . $this->payment->$pattern
+                    : $toSign;
+            }
+        }
+        dd($toSign);
         return hash('sha512', $toSign);
     }
 }

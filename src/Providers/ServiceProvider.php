@@ -14,7 +14,7 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function boot()
     {
-        $configPath = __DIR__.'../../config/paynamics.php';
+        $configPath = __DIR__.'/../../config/paynamics.php';
         $this->publishes([$configPath => config_path('paynamics.php')]);
     }
 

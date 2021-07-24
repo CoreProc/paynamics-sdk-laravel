@@ -29,7 +29,6 @@ namespace Coreproc\PaynamicsSdk\Request;
  * @property string $pmethod
  * @property string $expiry_limit
  * @property string $trxtype
- * @property array $orders
  * @property string $secure3d
  * @property string $metadata2
  */
@@ -65,10 +64,16 @@ class PaymentRequest
         'pmethod',
         'expiry_limit',
         'trxtype',
+        'mlogo_url',
         'orders',
         'secure3d',
         'metadata2',
     ];
+
+    /**
+     * @var array
+     */
+    public array $orders = [];
 
     /**
      * Create new instance of customer

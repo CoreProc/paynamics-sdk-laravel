@@ -9,26 +9,27 @@ use GuzzleHttp\Client;
 class PostClient
 {
     /**
-     * PostClient constructor.
+     * Create new instance of post client
+     *
+     * @param array $request
+     * @return object
      * @throws GuzzleException
      */
-    public function __construct(array $request)
+    public static function payment(array $request): object
     {
         $paynamicsClient = app(PaynamicsClient::class);
         $client = new Client();
 
-        $client->request('POST', $paynamicsClient->getEndpoint(), ['form_params' => $request]);
-    }
+        $response = $client->request('POST', $paynamicsClient->getEndpoint(), [
+            'allow_redirects' => [
+                'track_redirects' => true
+            ],
+            'form_params' => $request,
+        ]);
 
-    /**
-     * Create new instance of post client
-     *
-     * @param array $request
-     * @return PostClient
-     * @throws GuzzleException
-     */
-    public static function make(array $request): PostClient
-    {
-        return new self($request);
+        return (object) [
+            'data' => $response,
+            'redirect' => $response->getHeaderLine('X-Guzzle-Redirect-History')
+        ];
     }
 }

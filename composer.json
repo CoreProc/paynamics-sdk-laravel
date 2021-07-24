@@ -2,6 +2,13 @@
     "name": "coreproc/paygate-sdk",
     "type": "library",
     "license": "MIT",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Coreproc\\PaynamicsSdk-sdk\\Providers\\ServiceProvider"
+            ]
+        }
+    },
     "authors": [
         {
             "name": "Owen Keith Banan",
@@ -15,7 +22,6 @@
     },
     "require": {
         "php": ">=7.0",
-        "ext-simplexml": "*",
         "guzzlehttp/guzzle": "^7.3"
     }
 }
