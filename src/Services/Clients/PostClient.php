@@ -3,6 +3,7 @@
 namespace Coreproc\PaynamicsSdk\Services\Clients;
 
 use Coreproc\PaynamicsSdk\PaynamicsClient;
+use Coreproc\PaynamicsSdk\Responses\PaymentResponse;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 
@@ -12,10 +13,10 @@ class PostClient
      * Create new instance of post client
      *
      * @param array $request
-     * @return object
+     * @return PaymentResponse
      * @throws GuzzleException
      */
-    public static function payment(array $request): object
+    public static function payment(array $request)
     {
         $paynamicsClient = app(PaynamicsClient::class);
         $client = new Client();
@@ -27,9 +28,6 @@ class PostClient
             'form_params' => $request,
         ]);
 
-        return (object) [
-            'data' => $response,
-            'redirect' => $response->getHeaderLine('X-Guzzle-Redirect-History')
-        ];
+        return PaymentResponse::make($response);
     }
 }

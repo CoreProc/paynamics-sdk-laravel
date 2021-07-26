@@ -2,6 +2,7 @@
 
 namespace Coreproc\PaynamicsSdk\Services;
 
+use Coreproc\PaynamicsSdk\Responses\PaymentResponse;
 use Coreproc\PaynamicsSdk\Services\Interfaces\RequestInterface;
 use Coreproc\PaynamicsSdk\Services\Clients\PostClient;
 use Coreproc\PaynamicsSdk\Request\PaymentRequest;
@@ -93,9 +94,9 @@ class PaymentService implements RequestInterface
     /**
      * Send payment post request
      *
-     * @return object
+     * @return PaymentResponse
      */
-    public function post(): object
+    public function post(): PaymentResponse
     {
         if (empty($this->payment)) {
             throw new Exception('No request found. Please set the request body.');
