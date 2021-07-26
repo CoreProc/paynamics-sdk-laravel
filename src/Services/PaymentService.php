@@ -81,8 +81,9 @@ class PaymentService implements RequestInterface
     }
 
     /**
-     * @param PaymentRequest $payment
+     * Set request data for payment service
      *
+     * @param PaymentRequest $payment
      * @return PaymentService
      */
     public function setRequest(PaymentRequest $payment): PaymentService
