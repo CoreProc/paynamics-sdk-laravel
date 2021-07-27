@@ -5,7 +5,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Coreproc\\PaynamicsSdk-sdk\\Providers\\ServiceProvider"
+                "Coreproc\\PaynamicsSdk\\Providers\\ServiceProvider"
             ]
         }
     },

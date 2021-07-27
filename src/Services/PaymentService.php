@@ -2,17 +2,20 @@
 
 namespace Coreproc\PaynamicsSdk\Services;
 
-use Coreproc\PaynamicsSdk\Responses\PaymentResponse;
 use Coreproc\PaynamicsSdk\Services\Interfaces\RequestInterface;
 use Coreproc\PaynamicsSdk\Services\Clients\PostClient;
+use Coreproc\PaynamicsSdk\Responses\PaymentResponse;
 use Coreproc\PaynamicsSdk\Request\PaymentRequest;
 use Coreproc\PaynamicsSdk\Request\ItemRequest;
+use Coreproc\PaynamicsSdk\Traits\Formatter;
 use Coreproc\PaynamicsSdk\PaynamicsClient;
 use SimpleXMLElement;
 use Exception;
 
 class PaymentService implements RequestInterface
 {
+    use Formatter;
+
     /**
      * @var PaynamicsClient
      */
@@ -67,7 +70,7 @@ class PaymentService implements RequestInterface
     {
         $this->paynamicsClient = app(PaynamicsClient::class);
         $this->xml = (new SimpleXMLElement('<Request/>'));
-        $this->requestId = substr(uniqid(), 0, 13);
+        $this->requestId = '60fe8ff8c48de'; //substr(uniqid(), 0, 13);
     }
 
     /**
@@ -126,8 +129,13 @@ class PaymentService implements RequestInterface
                     $itemXml = $itemsXml->addChild('Items');
                     $itemXml->addChild('itemname', $item->item_name);
                     $itemXml->addChild('quantity', $item->quantity);
-                    $itemXml->addChild('amount', $item->quantity);
+                    $itemXml->addChild('amount', $this->toPaynamicsAmountFormat($item->amount));
                 }
+            }elseif ($attribute === 'amount') {
+                $this->xml->addChild(
+                    $attribute,
+                    $this->toPaynamicsAmountFormat($this->payment->$attribute ?? 0)
+                );
             } else {
                 $this->xml->addChild($attribute, $this->payment->$attribute ?? '');
             }
@@ -161,11 +169,13 @@ class PaymentService implements RequestInterface
                 $toSign = $toSign . $this->paynamicsClient->getMerchantKey();
             }else {
                 $toSign = isset($this->payment->$pattern)
-                    ? $toSign . $this->payment->$pattern
+                    ? $pattern === 'amount'
+                        ? $toSign . $this->toPaynamicsAmountFormat($this->payment->$pattern)
+                        : $toSign . $this->payment->$pattern
                     : $toSign;
             }
         }
-        dd($toSign);
+
         return hash('sha512', $toSign);
     }
 }

@@ -24,7 +24,7 @@ namespace Coreproc\PaynamicsSdk\Request;
  * @property string $phone
  * @property string $mobile
  * @property string $client_ip
- * @property string $amount
+ * @property float $amount
  * @property string $currency
  * @property string $pmethod
  * @property string $expiry_limit
