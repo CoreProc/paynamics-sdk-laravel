@@ -2,21 +2,21 @@
 
 namespace Coreproc\PaynamicsSdk\Services;
 
-class ServiceManager
+class PaynamicsServiceManager
 {
     /**
      * Crate new instance of
      *
      * @param string $service
-     * @return ServiceManager
+     * @return PaymentService
      */
-    public static function make(string $service): ServiceManager
+    public static function make(string $service): PaymentService
     {
         if (! array_key_exists($service, self::services())) {
             throw new \InvalidArgumentException('Service supplied does not exist.');
         }
 
-        return self::services()->$service;
+        return self::services()[$service];
     }
 
     /**

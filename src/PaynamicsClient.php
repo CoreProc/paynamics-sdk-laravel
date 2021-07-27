@@ -31,7 +31,7 @@ class PaynamicsClient
      * Client constructor.
      * @param array $credentials
      */
-    public function __construct(array $credentials)
+    public function __construct($credentials)
     {
         $this->merchantId = $credentials['merchantId'];
         $this->merchantKey = $credentials['merchantKey'];
@@ -58,10 +58,10 @@ class PaynamicsClient
     /**
      * Get merchant key
      *
-     * @return mixed|string
+     * @return string
      * @throws Exception
      */
-    public function getMerchantKey()
+    public function getMerchantKey(): string
     {
         if (empty($this->merchantId)) {
             throw new Exception('No paynamics merchant key set.');

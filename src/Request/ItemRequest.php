@@ -2,25 +2,80 @@
 
 namespace Coreproc\PaynamicsSdk\Request;
 
-/**
- * Class Item
- * @package Coreproc\PaynamicsSdk\Models
- * @property string $item_name
- * @property int quantity
- * @property float amount
- */
+use Coreproc\PaynamicsSdk\Traits\Formatter;
+
 class ItemRequest
 {
+    use Formatter;
+
     /**
-     * Set attributes that are mass assignable
-     *
-     * @var array
+     * @var string
      */
-    public array $fillable = [
-        'item_name',
-        'quantity',
-        'amount',
-    ];
+    protected string $itemName;
+
+    /**
+     * @var float
+     */
+    protected float $amount;
+
+    /**
+     * @var int
+     */
+    protected int $quantity;
+
+    /**
+     * @return string
+     */
+    public function getItemName(): string
+    {
+        return $this->itemName;
+    }
+
+    /**
+     * @param string $itemName
+     * @return ItemRequest
+     */
+    public function setItemName(string $itemName): ItemRequest
+    {
+        $this->itemName = $itemName;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getAmount(): float
+    {
+        return $this->toPaynamicsAmountFormat($this->amount);
+    }
+
+    /**
+     * @param float $amount
+     * @return ItemRequest
+     */
+    public function setAmount(float $amount): ItemRequest
+    {
+        $this->amount = $amount;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getQuantity(): int
+    {
+        return $this->quantity;
+    }
+
+    /**
+     * @param int $quantity
+     * @return ItemRequest
+     */
+    public function setQuantity(int $quantity): ItemRequest
+    {
+        $this->quantity = $quantity;
+        return $this;
+    }
 
     /**
      * Create new instance of item
