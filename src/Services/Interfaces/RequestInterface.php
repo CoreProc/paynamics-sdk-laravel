@@ -17,11 +17,4 @@ Interface RequestInterface
      * @return string
      */
     public function signature(): string;
-
-    /**
-     * Send request to paynamics
-     *
-     * @return mixed
-     */
-    public function post();
 }
