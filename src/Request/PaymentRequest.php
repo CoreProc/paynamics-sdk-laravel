@@ -423,7 +423,7 @@ class PaymentRequest
      */
     public function getSecure3d(): string
     {
-        return $this->secure3d;
+        return $this->secure3d ?? '';
     }
 
     /**
@@ -527,9 +527,9 @@ class PaymentRequest
     }
 
     /**
-     * @return float
+     * @return string
      */
-    public function getAmount(): float
+    public function getAmount(): string
     {
         return $this->toPaynamicsAmountFormat($this->amount ?? 0);
     }

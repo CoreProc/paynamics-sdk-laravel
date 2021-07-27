@@ -42,9 +42,9 @@ class ItemRequest
     }
 
     /**
-     * @return float
+     * @return string
      */
-    public function getAmount(): float
+    public function getAmount(): string
     {
         return $this->toPaynamicsAmountFormat($this->amount);
     }
