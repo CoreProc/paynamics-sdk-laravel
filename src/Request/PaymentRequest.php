@@ -643,7 +643,7 @@ class PaymentRequest
     }
 
     /**
-     * Create new instance of customer
+     * Create new instance of payment request
      *
      * @return PaymentRequest
      */
