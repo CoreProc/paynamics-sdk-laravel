@@ -3,6 +3,7 @@
 namespace Coreproc\PaynamicsSdk\Services;
 
 use Coreproc\PaynamicsSdk\Services\Interfaces\RequestInterface;
+use Coreproc\PaynamicsSdk\Services\Traits\GenerateForm;
 use Coreproc\PaynamicsSdk\Request\PaymentRequest;
 use Coreproc\PaynamicsSdk\Request\ItemRequest;
 use Coreproc\PaynamicsSdk\Traits\Formatter;
@@ -12,7 +13,7 @@ use Exception;
 
 class PaymentService implements RequestInterface
 {
-    use Formatter;
+    use Formatter, GenerateForm;
 
     /**
      * @var SimpleXMLElement
@@ -64,20 +65,6 @@ class PaymentService implements RequestInterface
     {
         $this->payment = $payment;
         return $this;
-    }
-
-    /**
-     * Generate form to trigger post request to paynamics
-     *
-     * @return string
-     */
-    public function generate(): string
-    {
-        $form = '<form name="paygate_frm" method="POST" action="' . $this->paynamicsClient->getEndpoint() . '">';
-        $form .= '<input type="hidden" name="paymentrequest" value="' .  base64_encode($this->toXml()) . '">';
-        $form .= '</form>';
-        $form .= '<script>document.paygate_frm.submit();</script>';
-        return $form;
     }
 
     /**
