@@ -70,6 +70,7 @@ class PaymentService implements RequestInterface
      * Generate XML data for payment request
      *
      * @return string
+     * @throws Exception
      */
     public function toXml(): string
     {
