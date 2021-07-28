@@ -28,6 +28,7 @@ class PaynamicsServiceManager
     {
         return [
             'payment' => PaymentService::make(),
+            'refund' => RefundService::make(),
         ];
     }
 }
