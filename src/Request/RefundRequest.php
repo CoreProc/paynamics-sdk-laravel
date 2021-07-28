@@ -122,4 +122,14 @@ class RefundRequest
         $this->amount = $amount;
         return $this;
     }
+
+    /**
+     * Create new instance of refund request
+     *
+     * @return RefundRequest
+     */
+    public static function make(): RefundRequest
+    {
+        return new self();
+    }
 }
