@@ -5,13 +5,12 @@ namespace Coreproc\PaynamicsSdk\Services;
 use Coreproc\PaynamicsSdk\Services\Interfaces\RequestInterface;
 use Coreproc\PaynamicsSdk\Services\Traits\GenerateForm;
 use Coreproc\PaynamicsSdk\Request\RefundRequest;
-use Coreproc\PaynamicsSdk\Traits\Formatter;
 use Coreproc\PaynamicsSdk\PaynamicsClient;
 use SimpleXMLElement;
 
 class RefundService implements RequestInterface
 {
-    use Formatter, GenerateForm;
+    use GenerateForm;
 
     /**
      * @var SimpleXMLElement

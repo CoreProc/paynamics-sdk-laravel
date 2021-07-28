@@ -6,14 +6,13 @@ use Coreproc\PaynamicsSdk\Services\Interfaces\RequestInterface;
 use Coreproc\PaynamicsSdk\Services\Traits\GenerateForm;
 use Coreproc\PaynamicsSdk\Request\PaymentRequest;
 use Coreproc\PaynamicsSdk\Request\ItemRequest;
-use Coreproc\PaynamicsSdk\Traits\Formatter;
 use Coreproc\PaynamicsSdk\PaynamicsClient;
 use SimpleXMLElement;
 use Exception;
 
 class PaymentService implements RequestInterface
 {
-    use Formatter, GenerateForm;
+    use GenerateForm;
 
     /**
      * @var SimpleXMLElement
