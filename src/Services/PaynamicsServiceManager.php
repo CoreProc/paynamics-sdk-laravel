@@ -27,6 +27,7 @@ class PaynamicsServiceManager
     public static function services(): array
     {
         return [
+            'rebill' => RebillService::make(),
             'payment' => PaymentService::make(),
             'refund' => RefundService::make(),
         ];
