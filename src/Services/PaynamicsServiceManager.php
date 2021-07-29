@@ -30,6 +30,8 @@ class PaynamicsServiceManager
             'rebill' => RebillService::make(),
             'payment' => PaymentService::make(),
             'refund' => RefundService::make(),
+            'query' => QueryService::make(),
+            'dispute-query' => DisputeQueryService::make(),
         ];
     }
 }
