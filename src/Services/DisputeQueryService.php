@@ -3,7 +3,7 @@
 namespace Coreproc\PaynamicsSdk\Services;
 
 use Coreproc\PaynamicsSdk\PaynamicsClient;
-use Coreproc\PaynamicsSdk\Request\DisputeQueryRequest;
+use Coreproc\PaynamicsSdk\Requests\DisputeQueryRequest;
 use Coreproc\PaynamicsSdk\Services\Interfaces\RequestInterface;
 use Coreproc\PaynamicsSdk\Services\Traits\GenerateForm;
 use Exception;

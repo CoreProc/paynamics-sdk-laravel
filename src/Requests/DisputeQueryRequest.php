@@ -1,6 +1,6 @@
 <?php
 
-namespace Coreproc\PaynamicsSdk\Request;
+namespace Coreproc\PaynamicsSdk\Requests;
 
 class DisputeQueryRequest
 {
