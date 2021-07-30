@@ -4,7 +4,7 @@ namespace Coreproc\PaynamicsSdk\Services;
 
 use Coreproc\PaynamicsSdk\Services\Interfaces\RequestInterface;
 use Coreproc\PaynamicsSdk\Services\Traits\GenerateForm;
-use Coreproc\PaynamicsSdk\Request\RebillRequest;
+use Coreproc\PaynamicsSdk\Requests\RebillRequest;
 use Coreproc\PaynamicsSdk\PaynamicsClient;
 use SimpleXMLElement;
 

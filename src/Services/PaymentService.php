@@ -4,8 +4,8 @@ namespace Coreproc\PaynamicsSdk\Services;
 
 use Coreproc\PaynamicsSdk\Services\Interfaces\RequestInterface;
 use Coreproc\PaynamicsSdk\Services\Traits\GenerateForm;
-use Coreproc\PaynamicsSdk\Request\PaymentRequest;
-use Coreproc\PaynamicsSdk\Request\ItemRequest;
+use Coreproc\PaynamicsSdk\Requests\PaymentRequest;
+use Coreproc\PaynamicsSdk\Requests\ItemRequest;
 use Coreproc\PaynamicsSdk\PaynamicsClient;
 use SimpleXMLElement;
 use Exception;
