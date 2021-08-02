@@ -28,6 +28,7 @@ class PaynamicsResponseManager
     {
         return [
             'notification' => NotificationResponse::make(),
+            'query' => QueryResponse::make(),
         ];
     }
 }
