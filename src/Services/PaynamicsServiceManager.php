@@ -5,7 +5,7 @@ namespace Coreproc\PaynamicsSdk\Services;
 class PaynamicsServiceManager
 {
     /**
-     * Crate new instance of
+     * Crate new instance of service type supplied
      *
      * @param string $service
      * @return PaymentService
