@@ -36,6 +36,16 @@ class NotificationResponse
     }
 
     /**
+     * Get merchant ID
+     *
+     * @return mixed
+     */
+    public function merchantId()
+    {
+        return $this->toArray()['merchantid'];
+    }
+
+    /**
      * Get request id
      *
      * @return mixed
