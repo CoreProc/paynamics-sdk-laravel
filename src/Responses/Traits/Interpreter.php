@@ -2,41 +2,38 @@
 
 namespace Coreproc\PaynamicsSdk\Responses\Traits;
 
-use Exception;
 use SimpleXMLElement;
+use Exception;
 
 trait Interpreter
 {
     /**
-     * @param $response
-     * @return string
-     * @throws Exception
-     */
-    public function interpret($response): string
-    {
-//        return base64_decode($response);
-        return $this->toXml($response);
-//        return $this->toArray($response);
-//        return $this->toArray($this->toXml($response));
-    }
-
-    /**
+     * Convert xml to string
+     *
      * @param string $response
      * @return string
      * @throws Exception
      */
     private function toXml(string $response): string
     {
-        return (new SimpleXMLElement(base64_decode($response)));
+        return (new SimpleXMLElement(base64_decode($response)))->asXML();
     }
 
     /**
-     * @param $xml
+     * Convert XML string data to array
+     *
      * @return array
      */
-    private function toArray($xml): array
+    private function toArray(): array
     {
-        $json = json_encode(simplexml_load_string($xml, "SimpleXMLElement", LIBXML_NOCDATA));
-        return json_decode($json,TRUE);
+        return json_decode($this->toObject(),TRUE);
+    }
+
+    /**
+     * Parse XML and convert into object
+     */
+    public function toObject()
+    {
+        return json_encode(simplexml_load_string($this->toXml($this->response)));
     }
 }
