@@ -4,7 +4,7 @@ namespace Coreproc\PaynamicsSdk\Responses;
 
 use Coreproc\PaynamicsSdk\Responses\Traits\Interpreter;
 
-class GatewayResponse
+class QueryResponse
 {
     use Interpreter;
 
@@ -16,9 +16,9 @@ class GatewayResponse
     /**
      * Create new instance of query response
      *
-     * @return GatewayResponse
+     * @return QueryResponse
      */
-    public static function make(): GatewayResponse
+    public static function make(): QueryResponse
     {
         return new self();
     }
@@ -29,7 +29,7 @@ class GatewayResponse
      * @param string $response
      * @return $this
      */
-    public function setResponse(string $response): GatewayResponse
+    public function setResponse(string $response): QueryResponse
     {
         $this->response = $response;
         return $this;
