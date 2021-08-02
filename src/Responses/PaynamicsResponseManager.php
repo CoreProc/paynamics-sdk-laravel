@@ -29,6 +29,7 @@ class PaynamicsResponseManager
         return [
             'notification' => NotificationResponse::make(),
             'rebill' => RebillResponse::make(),
+            'query' => QueryResponse::make(),
         ];
     }
 }
