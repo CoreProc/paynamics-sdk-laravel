@@ -10,7 +10,7 @@ class RefundResponse
     use Interpreter, GatewayResponse;
 
     /**
-     * Create new instance of rebill response
+     * Create new instance of refund response
      *
      * @return RefundResponse
      */
