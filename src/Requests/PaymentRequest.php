@@ -656,9 +656,11 @@ class PaymentRequest
      * Add item to array of items
      *
      * @param ItemRequest $item
+     * @return PaymentRequest
      */
-    public function addItem(ItemRequest $item)
+    public function addItem(ItemRequest $item): PaymentRequest
     {
         array_push($this->orders, $item);
+        return $this;
     }
 }
