@@ -153,7 +153,7 @@ class PaymentRequest
      */
     public function getIpAddress(): ?string
     {
-        return $this->ipAdress ?? '';
+        return $this->ipAddress ?? '';
     }
 
     /**
