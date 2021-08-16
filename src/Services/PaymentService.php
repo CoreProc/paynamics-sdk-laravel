@@ -2,6 +2,7 @@
 
 namespace Coreproc\PaynamicsSdk\Services;
 
+use Coreproc\PaynamicsSdk\HsbcClient;
 use Coreproc\PaynamicsSdk\Services\Interfaces\RequestInterface;
 use Coreproc\PaynamicsSdk\Services\Traits\GenerateForm;
 use Coreproc\PaynamicsSdk\Requests\PaymentRequest;
@@ -35,6 +36,16 @@ class PaymentService implements RequestInterface
     public string $requestId;
 
     /**
+     * @var string
+     */
+    public string $payment_type = 'default';
+
+    /**
+     * @var HsbcClient
+     */
+    public HsbcClient $hsbcClient;
+
+    /**
      * PaymentRequest constructor.
      */
     public function __construct()
@@ -42,6 +53,16 @@ class PaymentService implements RequestInterface
         $this->paynamicsClient = app(PaynamicsClient::class);
         $this->requestId = substr(uniqid(), 0, 13);
         $this->xml = (new SimpleXMLElement('<Request/>'));
+    }
+
+    /**
+     * Set 3rd party payment type
+     *
+     * @param string $type
+     */
+    public function setPaymentType(string $type)
+    {
+        $this->payment_type = $type;
     }
 
     /**
@@ -74,6 +95,10 @@ class PaymentService implements RequestInterface
      */
     public function toXml(): string
     {
+        $merchantId = $this->payment_type !== 'hsbc'
+            ? $this->paynamicsClient->getMerchantId()
+            : $this->hsbcClient->getMerchantId();
+
         if (empty($this->payment)) {
             throw new Exception('No request found. Please set the request body.');
         }
@@ -88,7 +113,7 @@ class PaymentService implements RequestInterface
             $itemXml->addChild('amount', $item->getAmount());
         }
 
-        $this->xml->addChild('mid', $this->paynamicsClient->getMerchantId());
+        $this->xml->addChild('mid', $merchantId);
         $this->xml->addChild('request_id', $this->requestId);
         $this->xml->addChild('ip_address', $this->payment->getIpAddress());
         $this->xml->addChild('notification_url', $this->payment->getNotificationUrl());
@@ -129,11 +154,19 @@ class PaymentService implements RequestInterface
      */
     public function signature(): string
     {
+        $merchantId = $this->payment_type !== 'hsbc'
+            ? $this->paynamicsClient->getMerchantId()
+            : $this->hsbcClient->getMerchantId();
+
+        $merchantKey = $this->payment_type !== 'hsbc'
+            ? $this->paynamicsClient->getMerchantKey()
+            : $this->hsbcClient->getMerchantKey();
+
         if (empty($this->payment)) {
             throw new Exception('No request found. Please set the request body.');
         }
 
-        $toSign = $this->paynamicsClient->getMerchantId()
+        $toSign = $merchantId
             . $this->requestId
             . $this->payment->getIpAddress()
             . $this->payment->getNotificationUrl()
@@ -153,7 +186,7 @@ class PaymentService implements RequestInterface
             . $this->payment->getAmount()
             . $this->payment->getCurrency()
             . $this->payment->getSecure3d()
-            . $this->paynamicsClient->getMerchantKey();
+            . $merchantKey;
 
         return hash('sha512', $toSign);
     }

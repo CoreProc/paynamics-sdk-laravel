@@ -2,6 +2,7 @@
 
 namespace Coreproc\PaynamicsSdk\Providers;
 
+use Coreproc\PaynamicsSdk\HsbcClient;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Coreproc\PaynamicsSdk\PaynamicsClient;
 
@@ -35,6 +36,12 @@ class ServiceProvider extends BaseServiceProvider
                         'sandbox' => config('paynamics.endpoint.sandbox'),
                         'production' => config('paynamics.endpoint.production'),
                     ],
+                ]);
+            });
+
+            $this->app->singleton(HsbcClient::class, function ($app) {
+                return new HsbcClient([
+                    'hsbc' => config('paynamics.hsbc'),
                 ]);
             });
         }
