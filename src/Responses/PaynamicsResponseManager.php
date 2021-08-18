@@ -22,7 +22,7 @@ class PaynamicsResponseManager
 
         $response = self::responses()[$type];
 
-        if ($response->merchantId !== $paynamicsClient->getMerchantId) {
+        if ($response->merchantId() !== $paynamicsClient->getMerchantId) {
             throw new \Exception('Merchant ID did not match on environment credentials.');
         }
 
