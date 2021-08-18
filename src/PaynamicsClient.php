@@ -33,8 +33,8 @@ class PaynamicsClient
      */
     public function __construct($credentials)
     {
-        $this->merchantId = $credentials['merchantId'];
-        $this->merchantKey = $credentials['merchantKey'];
+        $this->merchantId = $credentials['merchant_id'];
+        $this->merchantKey = $credentials['merchant_key'];
         $this->endpoint = $credentials['environment'] !== 'production'
             ? $credentials['endpoint']['sandbox']
             : $credentials['endpoint']['production'];

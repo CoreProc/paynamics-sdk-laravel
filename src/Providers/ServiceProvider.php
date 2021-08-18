@@ -2,9 +2,9 @@
 
 namespace Coreproc\PaynamicsSdk\Providers;
 
-use Coreproc\PaynamicsSdk\HsbcClient;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Coreproc\PaynamicsSdk\PaynamicsClient;
+use Coreproc\PaynamicsSdk\HsbcClient;
 
 class ServiceProvider extends BaseServiceProvider
 {
@@ -16,7 +16,7 @@ class ServiceProvider extends BaseServiceProvider
     public function boot()
     {
         $configPath = __DIR__.'/../../config/paynamics.php';
-        $this->publishes([$configPath => config_path('paynamics.php')]);
+        $this->publishes([$configPath => config_path('paynamics.php')], 'config');
     }
 
     /**
@@ -26,24 +26,24 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function register()
     {
-        if (file_exists(config_path('paynamics.php'))) {
-            $this->app->singleton(PaynamicsClient::class, function ($app) {
-                return new PaynamicsClient([
-                    'merchantId' => config('paynamics.merchantId'),
-                    'merchantKey' => config('paynamics.merchantKey'),
-                    'environment' => config('paynamics.environment'),
-                    'endpoint' => [
-                        'sandbox' => config('paynamics.endpoint.sandbox'),
-                        'production' => config('paynamics.endpoint.production'),
-                    ],
-                ]);
-            });
+        $this->mergeConfigFrom(__DIR__ . '/../../config/paynamics.php', 'paynamics');
 
-            $this->app->singleton(HsbcClient::class, function ($app) {
-                return new HsbcClient([
-                    'hsbc' => config('paynamics.hsbc'),
-                ]);
-            });
-        }
+        $this->app->singleton(PaynamicsClient::class, function ($app) {
+            return new PaynamicsClient([
+                'merchantId' => config('paynamics.merchantId'),
+                'merchantKey' => config('paynamics.merchantKey'),
+                'environment' => config('paynamics.environment'),
+                'endpoint' => [
+                    'sandbox' => config('paynamics.endpoint.sandbox'),
+                    'production' => config('paynamics.endpoint.production'),
+                ],
+            ]);
+        });
+
+        $this->app->singleton(HsbcClient::class, function ($app) {
+            return new HsbcClient([
+                'hsbc' => config('paynamics.hsbc'),
+            ]);
+        });
     }
 }

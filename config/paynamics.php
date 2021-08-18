@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'merchantId' => env('PAYNAMICS_MERCHANT_ID'),
+    'merchant_id' => env('PAYNAMICS_MERCHANT_ID'),
 
-    'merchantKey' => env('PAYNAMICS_MERCHANT_KEY'),
+    'merchant_key' => env('PAYNAMICS_MERCHANT_KEY'),
 
     'environment' => env('PAYNAMICS_ENVIRONMENT', 'sandbox'),
 
