@@ -1,5 +1,5 @@
 {
-    "name": "coreproc/paygate-sdk",
+    "name": "coreproc/paynamics-sdk",
     "type": "library",
     "license": "MIT",
     "extra": {
