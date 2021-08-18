@@ -1,5 +1,5 @@
 {
-    "name": "coreproc/paynamics-sdk",
+    "name": "coreproc/paynamics-sdk-laravel",
     "type": "library",
     "license": "MIT",
     "extra": {
