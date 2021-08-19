@@ -59,10 +59,12 @@ class PaymentService implements RequestInterface
      * Set 3rd party payment type
      *
      * @param string $type
+     * @return PaymentService
      */
-    public function setPaymentType(string $type)
+    public function setPaymentType(string $type): PaymentService
     {
         $this->payment_type = $type;
+        return $this;
     }
 
     /**
