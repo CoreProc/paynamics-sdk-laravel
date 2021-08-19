@@ -30,8 +30,8 @@ class ServiceProvider extends BaseServiceProvider
 
         $this->app->singleton(PaynamicsClient::class, function ($app) {
             return new PaynamicsClient([
-                'merchantId' => config('paynamics.merchantId'),
-                'merchantKey' => config('paynamics.merchantKey'),
+                'merchant_id' => config('paynamics.merchant_id'),
+                'merchant_key' => config('paynamics.merchant_key'),
                 'environment' => config('paynamics.environment'),
                 'endpoint' => [
                     'sandbox' => config('paynamics.endpoint.sandbox'),
