@@ -2,12 +2,12 @@
 
 namespace Coreproc\PaynamicsSdk\Services;
 
-use Coreproc\PaynamicsSdk\HsbcClient;
 use Coreproc\PaynamicsSdk\Services\Interfaces\RequestInterface;
 use Coreproc\PaynamicsSdk\Services\Traits\GenerateForm;
 use Coreproc\PaynamicsSdk\Requests\PaymentRequest;
 use Coreproc\PaynamicsSdk\Requests\ItemRequest;
 use Coreproc\PaynamicsSdk\PaynamicsClient;
+use Coreproc\PaynamicsSdk\HsbcClient;
 use SimpleXMLElement;
 use Exception;
 
@@ -51,6 +51,7 @@ class PaymentService implements RequestInterface
     public function __construct()
     {
         $this->paynamicsClient = app(PaynamicsClient::class);
+        $this->hsbcClient = app(HsbcClient::class);
         $this->requestId = substr(uniqid(), 0, 13);
         $this->xml = (new SimpleXMLElement('<Request/>'));
     }
