@@ -15,14 +15,14 @@ return [
     'hsbc' => [
         'merchant_id' => env('HSBC_MERCHANT_ID'),
         'name' => env('HSBC_MERCHANT_NAME'),
-        'merchant_key' => env('merchant_key'),
+        'merchant_key' => env('HSBC_MERCHANT_KEY'),
     ],
 
     'notification_url' => ('PAYNAMICS_NOTIFICATION_URL'),
 
-    'responseUrl' => env('PAYNAMICS_RESPONSE_URL'),
+    'response_url' => env('PAYNAMICS_RESPONSE_URL'),
 
-    'mtacUrl' => env('PAYNAMICS_MTAC_URL'),
+    'mtac_url' => env('PAYNAMICS_MTAC_URL'),
 
-    'cancelUrl' => env('PAYNAMICS_CANCEL_URL'),
+    'cancel_url' => env('PAYNAMICS_CANCEL_URL'),
 ];
