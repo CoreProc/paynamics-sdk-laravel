@@ -4,6 +4,7 @@ namespace Coreproc\PaynamicsSdk\Responses;
 
 use Coreproc\PaynamicsSdk\PaynamicsClient;
 use Coreproc\PaynamicsSdk\HsbcClient;
+use http\Env\Response;
 
 class PaynamicsResponseManager
 {
@@ -11,15 +12,17 @@ class PaynamicsResponseManager
      * Create new instance of response type supplied
      *
      * @param string $type
+     * @param string $response
      * @return mixed
      */
-    public static function make(string $type)
+    public static function make(string $type, string $response)
     {
         if (! array_key_exists($type, self::responses())) {
             throw new \InvalidArgumentException('Response type not found.');
         }
 
-        $response = self::responses()[$type];
+        $response = self::responses()[$type]
+            ->setResponse($response);
 
         if (self::validMerchantId($response->merchantId())) {
             throw new \Exception('Merchant ID did not match on environment credentials.');
