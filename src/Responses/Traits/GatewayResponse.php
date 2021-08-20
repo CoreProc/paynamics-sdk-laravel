@@ -5,11 +5,6 @@ namespace Coreproc\PaynamicsSdk\Responses\Traits;
 trait GatewayResponse
 {
     /**
-     * @var string
-     */
-    public string $response;
-
-    /**
      * @param string $response
      */
     public function setResponse(string $response)

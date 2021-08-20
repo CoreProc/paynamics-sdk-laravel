@@ -10,6 +10,11 @@ class RefundResponse
     use Interpreter, GatewayResponse;
 
     /**
+     * @var string
+     */
+    public string $response;
+
+    /**
      * Create new instance of refund response
      *
      * @return RefundResponse

@@ -10,6 +10,11 @@ class RebillResponse
     use Interpreter, GatewayResponse;
 
     /**
+     * @var string
+     */
+    public string $response;
+
+    /**
      * Create new instance of rebill response
      *
      * @return RebillResponse

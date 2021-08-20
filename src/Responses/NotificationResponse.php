@@ -9,6 +9,9 @@ class NotificationResponse
 {
     use Interpreter, GatewayResponse;
 
+    /**
+     * @var string
+     */
     public string $response;
 
     /**

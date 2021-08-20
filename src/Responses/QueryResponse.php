@@ -10,6 +10,11 @@ class QueryResponse
     use Interpreter, GatewayResponse;
 
     /**
+     * @var string
+     */
+    public string $response;
+
+    /**
      * Create new instance of query response
      *
      * @return QueryResponse
