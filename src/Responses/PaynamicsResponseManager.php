@@ -24,8 +24,8 @@ class PaynamicsResponseManager
             $data = str_replace(' ', '+', $data);
         }
 
-        $response = self::responses()[$type]
-            ->setResponse($data);
+        $response = self::responses()[$type];
+        $response->setResponse($data);
 
         if (self::validMerchantId($response->merchantId())) {
             throw new \Exception('Merchant ID did not match on environment credentials.');
