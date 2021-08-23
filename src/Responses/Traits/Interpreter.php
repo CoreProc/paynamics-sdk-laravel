@@ -26,7 +26,7 @@ trait Interpreter
      */
     public function toArray(): array
     {
-        return json_decode($this->toObject(),TRUE);
+        return json_decode($this->toObject(), TRUE);
     }
 
     /**

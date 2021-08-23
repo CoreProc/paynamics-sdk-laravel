@@ -19,7 +19,7 @@ trait GatewayResponse
      */
     public function merchantId()
     {
-        return $this->toArray()['merchantid'];
+        return $this->toArray()['application']['merchantid'];
     }
 
     /**
@@ -29,7 +29,7 @@ trait GatewayResponse
      */
     public function requestId()
     {
-        return $this->toArray()['request_id'];
+        return $this->toArray()['application']['request_id'];
     }
 
     /**
@@ -39,7 +39,7 @@ trait GatewayResponse
      */
     public function responseId()
     {
-        return $this->toArray()['response_id'];
+        return $this->toArray()['application']['response_id'];
     }
 
     /**
@@ -49,7 +49,7 @@ trait GatewayResponse
      */
     public function responseCode()
     {
-        return $this->toArray()['response_code'];
+        return $this->toArray()['responseStatus']['response_code'];
     }
 
     /**
@@ -59,7 +59,7 @@ trait GatewayResponse
      */
     public function responseMessage()
     {
-        return $this->toArray()['response_message'];
+        return $this->toArray()['responseStatus']['response_message'];
     }
 
     /**
@@ -69,7 +69,7 @@ trait GatewayResponse
      */
     public function responseAdvise()
     {
-        return $this->toArray()['response_advise'];
+        return $this->toArray()['responseStatus']['response_advise'];
     }
 
     /**
@@ -79,7 +79,7 @@ trait GatewayResponse
      */
     public function timeStamp()
     {
-        return $this->toArray()['timestamp'];
+        return $this->toArray()['application']['timestamp'];
     }
 
     /**
@@ -89,7 +89,7 @@ trait GatewayResponse
      */
     public function processorResponseId()
     {
-        return $this->toArray()['processor_response_id'];
+        return $this->toArray()['responseStatus']['processor_response_id'];
     }
 
     /**
@@ -99,7 +99,7 @@ trait GatewayResponse
      */
     public function processorResponseAuthCode()
     {
-        return $this->toArray()['processor_response_authcode'];
+        return $this->toArray()['responseStatus']['processor_response_authcode'];
     }
 
     /**
@@ -109,6 +109,36 @@ trait GatewayResponse
      */
     public function signature()
     {
-        return $this->toArray()['signature'];
+        return $this->toArray()['application']['signature'];
+    }
+
+    /**
+     * Get payment type
+     *
+     * @return mixed
+     */
+    public function pType()
+    {
+        return $this->toArray()['application']['ptype'];
+    }
+
+    /**
+     * Get sub data
+     *
+     * @return mixed
+     */
+    public function subData()
+    {
+        return $this->toArray()['sub_data'];
+    }
+
+    /**
+     * Get sub data
+     *
+     * @return mixed
+     */
+    public function transactionHistory()
+    {
+        return $this->toArray()['transactionHistory'];
     }
 }
