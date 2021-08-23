@@ -28,10 +28,10 @@ class PaynamicsResponseManager
         $response->setResponse($data);
 
         if (self::validMerchantId($response->merchantId())) {
+            return $response;
+        }else {
             throw new \Exception('Merchant ID did not match on environment credentials.');
         }
-
-        return $response;
     }
 
     /**
