@@ -22,6 +22,9 @@ class PaynamicsResponseManager
 
         if ($type === 'notification') {
             $data = str_replace(' ', '+', $data);
+            $data = substr($data, -1) !== '>'
+                ? $data . '>'
+                : $data;
         }
 
         $response = self::responses()[$type];
