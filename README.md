@@ -4,9 +4,26 @@
 ***
 `composer require CoreProc/paynamics-sdk-laravel`
 
+`php artisan vendor:publish --provider="Coreproc\PaynamicsSdk\Provid
+ers\ServiceProvider"`
 
 ## Usage
 ***
+
+### Environment Variable
+```php
+
+PAYNAMICS_MERCHANT_ID=<your paynamics merchant ID>
+PAYNAMICS_MERCHANT_KEY=<your paynamics merchant KEY>
+PAYNAMICS_ENVIRONMENT=<sandbox || production>
+
+PAYNAMICS_SANDBOX_ENDPOINT=<paynamcis sandabox endpoint>
+PAYNAMICS_PRODUCTION_ENDPOINT=<your production endpoint>
+
+HSBC_MERCHANT_ID=<your HSBC merchant ID >
+HSBC_MERCHANT_NAME=<your HSBC merchant name>
+HSBC_MERCHANT_KEY=<your HSBC merchant KEY>
+```
 
 ### Generating your payment request
 ``` php
