@@ -118,3 +118,9 @@ $paymentRequest->setMetaData2(<[bank]:[mode]:[term]>)
 “5” – Reduce Interest Installment Promo
 
 **For HSBC**, mode is 1. **For BPI**, on test env, available mode is 2
+
+## Credits
+***
+
+- [Owen Banan](https://github.com/owenbanan-cp)
+- [All Contributors](../../contributors)
